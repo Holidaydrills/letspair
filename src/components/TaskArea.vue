@@ -1,37 +1,47 @@
 <template>
   <div class="task-area">
-    <div class="lane" v-for="lane in lanes" v-bind:key="lane.id">
-      {{ lane.id }}
+    <div v-for="lane in lanes" :key="lane.id">
+      <Lane :id="lane.id" @remove-lane="removeLane" />
     </div>
     <button @click="addNewLane">{{ $t("add-lane-button") }}</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
+import Lane from "./Lane.vue";
+import { defineComponent } from "vue";
 
-export default class TaskArea extends Vue {
-  private lanes = [
-    {
-      id: "1",
-      people: ["Dev 1", "Dev 2"],
-      tasks: ["Task 1", "Task 2"],
+export default defineComponent({
+  components: { Lane },
+  data() {
+    return {
+      lanes: [
+        {
+          id: "1",
+          people: ["Dev 1", "Dev 2"],
+          tasks: ["Task 1", "Task 2"],
+        },
+        {
+          id: "2",
+          people: ["Dev 3", "Dev 4"],
+          tasks: ["Task 3", "Task 4"],
+        },
+      ],
+    };
+  },
+  methods: {
+    addNewLane() {
+      this.lanes.push({
+        id: "3",
+        people: ["Dev 5", "Dev 6"],
+        tasks: ["Task 5", "Task 6"],
+      });
     },
-    {
-      id: "2",
-      people: ["Dev 3", "Dev 4"],
-      tasks: ["Task 3", "Task 4"],
+    removeLane(id: string) {
+      this.lanes = this.lanes.filter((lane) => lane.id !== id);
     },
-  ];
-
-  public addNewLane() {
-    this.lanes.push({
-      id: "3",
-      people: ["Dev 5", "Dev 6"],
-      tasks: ["Task 5", "Task 6"],
-    })
-  }
-}
+  },
+});
 </script>
 
 <style lang="scss">
@@ -39,12 +49,5 @@ export default class TaskArea extends Vue {
   background-color: purple;
   width: 100%;
   height: 100%;
-}
-
-.lane {
-  height: 7em;
-  padding: 5px;
-  border-bottom-style: solid;
-  border-width: 1px;
 }
 </style>
