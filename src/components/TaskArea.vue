@@ -3,7 +3,7 @@
     <div class="lane" v-for="lane in lanes" v-bind:key="lane.id">
       {{ lane.id }}
     </div>
-    <button>New Lane</button>
+    <button @click="addNewLane">{{ $t("add-lane-button") }}</button>
   </div>
 </template>
 
@@ -23,6 +23,14 @@ export default class TaskArea extends Vue {
       tasks: ["Task 3", "Task 4"],
     },
   ];
+
+  public addNewLane() {
+    this.lanes.push({
+      id: "3",
+      people: ["Dev 5", "Dev 6"],
+      tasks: ["Task 5", "Task 6"],
+    })
+  }
 }
 </script>
 
