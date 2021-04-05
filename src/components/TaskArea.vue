@@ -32,7 +32,7 @@ export default defineComponent({
   methods: {
     addNewLane() {
       this.lanes.push({
-        id: "3",
+        id: uuidv4(),
         people: ["Dev 5", "Dev 6"],
         tasks: ["Task 5", "Task 6"],
       });
@@ -42,6 +42,12 @@ export default defineComponent({
     },
   },
 });
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 </script>
 
 <style lang="scss">
