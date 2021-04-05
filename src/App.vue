@@ -1,27 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div class="container">
+    <div class="header">
+      <p>Test</p>
+    </div>
+    <div class="left-sidebar">
+      <p>Test</p>
+    </div>
+    <div class="content-area">
+      <TaskArea></TaskArea>
+    </div>
+    <div class="right-sidebar">
+      <p>Test</p>
+    </div>
+    <div class="footer">
+      <p>Test</p>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import TaskArea from "./components/TaskArea.vue";
 
 @Options({
   components: {
-    HelloWorld,
+    TaskArea,
   },
 })
 export default class App extends Vue {}
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+// #app {
+//   font-family: Avenir, Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+//   color: #2c3e50;
+//   margin-top: 60px;
+// }
+@import "./sass/main.scss";
 </style>
