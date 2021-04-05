@@ -11,6 +11,15 @@
     </div>
     <div class="right-sidebar">
       <p>Test</p>
+      <div class="drop-zone">
+        <div
+          class="drag-element"
+          draggable="true"
+          @dragstart="startDrag($event)"
+        >
+          Draggable Element
+        </div>
+      </div>
     </div>
     <div class="footer">
       <p>Test</p>
@@ -19,15 +28,17 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./components/TaskArea.vue";
 
-@Options({
-  components: {
-    TaskArea,
+export default defineComponent({
+  components: { TaskArea },
+  methods: {
+    startDrag(event: Event) {
+      console.log(`Starting to drag: ${JSON.stringify(event)}`);
+    },
   },
-})
-export default class App extends Vue {}
+});
 </script>
 
 <style lang="scss">
@@ -40,4 +51,14 @@ export default class App extends Vue {}
 //   margin-top: 60px;
 // }
 @import "./sass/main.scss";
+.drag-element {
+  background-color: #3498db;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.drop-zone {
+  background-color: #eee;
+  margin-bottom: 10px;
+  padding: 10px;
+}
 </style>
