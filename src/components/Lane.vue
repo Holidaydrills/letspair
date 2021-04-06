@@ -1,14 +1,15 @@
 <template>
-  <div>
-    <p>{{ id }}</p>
-  </div>
   <div
     class="drop-zone"
     @drop="onDrop($event, 1)"
     @dragover.prevent
     @dragenter.prevent
-  ></div>
-  <button @click="$emit('removeLane', id)">Remove lane</button>
+  >
+    <div>
+      <p>{{ lane.id }}</p>
+    </div>
+  </div>
+  <button @click="$emit('removeLane', lane.id)">Remove lane</button>
 </template>
 
 <script lang="ts">
@@ -17,8 +18,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   emits: ["removeLane"],
   props: {
-    id: {
-      type: String,
+    lane: {
+      type: Object,
       required: true,
     },
   },
