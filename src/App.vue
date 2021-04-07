@@ -7,18 +7,18 @@
       <p>Test</p>
     </div>
     <div class="content-area">
-      <TaskArea></TaskArea>
+      <TaskArea/>
     </div>
     <div class="right-sidebar">
       <p>Test</p>
-      <div class="drop-zone">
-        <div
+      <div class="person-area">
+        <!-- <div
           class="drag-element"
           draggable="true"
           @dragstart="startDrag($event)"
         >
           Draggable Element
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="footer">
@@ -56,9 +56,9 @@ export default defineComponent({
   margin-bottom: 10px;
   padding: 5px;
 }
-.drop-zone {
+.person-area {
   background-color: #eee;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 100px;
 }
 </style>

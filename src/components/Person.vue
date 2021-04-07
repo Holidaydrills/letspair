@@ -1,26 +1,11 @@
 <template>
-  <div
-    class="lane-persons"
-    @drop="onDrop($event, 1)"
-    @dragover.prevent
-    @dragenter.prevent
-  >
-    <div>
-      <p>{{ lane.id }}</p>
-      <div v-for="person in lane.people" :key="person">
-        <Person></Person>
-      </div>
-    </div>
-  </div>
-  <button @click="$emit('removeLane', lane.id)">Remove lane</button>
+  <div class="person" draggable="true" @dragstart="startDrag($event)">Test</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Person from "./Person.vue";
 
 export default defineComponent({
-  components: { Person },
   emits: ["removeLane"],
   props: {
     lane: {
@@ -44,16 +29,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.lane {
-  height: 7em;
+.person {
+  height: 2em;
+  min-width: 100px;
+  display: inline-block;
   padding: 5px;
-  border-bottom-style: solid;
-  border-width: 1px;
-}
-
-.lane-persons{
-  background-color: #eee;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin: 2px;
+  background-color: #bdd5ea;
 }
 </style>
