@@ -7,18 +7,19 @@
       <p>Test</p>
     </div>
     <div class="content-area">
-      <TaskArea/>
+      <TaskArea />
     </div>
     <div class="right-sidebar">
       <p>Test</p>
-      <div class="person-area">
-        <!-- <div
-          class="drag-element"
-          draggable="true"
-          @dragstart="startDrag($event)"
-        >
-          Draggable Element
-        </div> -->
+      <div
+        class="person-area"
+        @drop="onDrop($event, 1)"
+        @dragover.prevent
+        @dragenter.prevent
+      >
+        <div v-for="person in persons" :key="person.id">
+          <Person></Person>
+        </div>
       </div>
     </div>
     <div class="footer">
@@ -30,12 +31,33 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./components/TaskArea.vue";
+import Person from "./components/Person.vue";
 
 export default defineComponent({
-  components: { TaskArea },
+  components: { TaskArea, Person },
+  data() {
+    return {
+      persons: [
+        {
+          id: "Person1",
+        },
+        {
+          id: "Person2",
+        },
+        {
+          id: "Person3",
+        },
+      ],
+    };
+  },
   methods: {
     startDrag(event: Event) {
       console.log(`Starting to drag: ${JSON.stringify(event)}`);
+    },
+    onDrop(evt: any, person: any) {
+      // const itemID = evt.dataTransfer.getData("itemID");
+      // this.lane.people.push("New Person");
+      alert(`Dropped this`);
     },
   },
 });
