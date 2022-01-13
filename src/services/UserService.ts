@@ -4,7 +4,8 @@ const people: Array<Person> = [
   new Person("123", "Harry"),
   new Person("456", "Thomas"),
   new Person("789", "Luka"),
+  new Person("789", "Henry"),
 ];
-export function getPeople(): Array<Person> {
+export function getAllUsers(): Array<Person> {
   return people;
 }

@@ -25,24 +25,7 @@ import Person from "./Person.vue";
 
 export default defineComponent({
   components: { Person },
-  data() {
-    return {
-      people: [
-        {
-          id: "Person1",
-          name: "Peer",
-        },
-        {
-          id: "Person2",
-          name: "Luka",
-        },
-        {
-          id: "Person3",
-          name: "Ronaldo",
-        },
-      ],
-    };
-  },
+  props: ["people"],
   methods: {
     onDrop(evt: any, person: any) {
       // const itemID = evt.dataTransfer.getData("itemID");
