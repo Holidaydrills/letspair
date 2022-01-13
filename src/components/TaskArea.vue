@@ -17,13 +17,31 @@ export default defineComponent({
     return {
       lanes: [
         {
-          id: "1",
-          people: ["Dev 1", "Dev 2"],
+          id: uuidv4(),
+          people: [
+            {
+              id: uuidv4(),
+              name: "Randy",
+            },
+            {
+              id: uuidv4(),
+              name: "Michael",
+            },
+          ],
           tasks: ["Task 1", "Task 2"],
         },
         {
-          id: "2",
-          people: ["Dev 3", "Dev 4"],
+          id: uuidv4(),
+          people: [
+            {
+              id: uuidv4(),
+              name: "Todd",
+            },
+            {
+              id: uuidv4(),
+              name: "Brono",
+            },
+          ],
           tasks: ["Task 3", "Task 4"],
         },
       ],
@@ -33,7 +51,7 @@ export default defineComponent({
     addNewLane() {
       this.lanes.push({
         id: uuidv4(),
-        people: ["Dev 5", "Dev 6"],
+        people: [],
         tasks: ["Task 5", "Task 6"],
       });
     },
