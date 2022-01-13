@@ -10,7 +10,7 @@
     >
       <!-- <div v-for="person in persons" :key="person.id"> -->
       <Person
-        v-for="person in persons"
+        v-for="person in people"
         v-bind:person="person"
         :key="person.id"
       ></Person>
@@ -27,7 +27,7 @@ export default defineComponent({
   components: { Person },
   data() {
     return {
-      persons: [
+      people: [
         {
           id: "Person1",
           name: "Peer",
