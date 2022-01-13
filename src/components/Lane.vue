@@ -7,9 +7,11 @@
   >
     <div>
       <p>{{ lane.id }}</p>
-      <div v-for="person in lane.people" :key="person">
-        <Person></Person>
-      </div>
+      <Person
+        v-for="person in lane.people"
+        v-bind:person="person"
+        :key="person"
+      ></Person>
     </div>
   </div>
   <button @click="$emit('removeLane', lane.id)">Remove lane</button>
@@ -51,7 +53,7 @@ export default defineComponent({
   border-width: 1px;
 }
 
-.lane-persons{
+.lane-persons {
   background-color: #eee;
   margin-bottom: 10px;
   padding: 10px;
