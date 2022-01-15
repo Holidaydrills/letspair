@@ -4,10 +4,10 @@
       <p>Test</p>
     </div>
     <div class="left-sidebar">
-      <SidebarLeft :people="users" />
+      <sidebar-left :people="users" />
     </div>
     <div class="content-area">
-      <TaskArea />
+      <task-area />
     </div>
     <div class="right-sidebar">
       <p>Test</p>

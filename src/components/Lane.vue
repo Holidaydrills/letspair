@@ -7,11 +7,11 @@
   >
     <div>
       <p>{{ lane.id }}</p>
-      <Person
+      <person
         v-for="person in lane.people"
         v-bind:person="person"
         :key="person"
-      ></Person>
+      ></person>
     </div>
   </div>
   <button @click="$emit('removeLane', lane.id)">Remove lane</button>

@@ -9,11 +9,11 @@
       @dragenter.prevent
     >
       <!-- <div v-for="person in persons" :key="person.id"> -->
-      <Person
+      <person
         v-for="person in people"
         v-bind:person="person"
         :key="person.id"
-      ></Person>
+      ></person>
       <!-- </div> -->
     </div>
   </div>

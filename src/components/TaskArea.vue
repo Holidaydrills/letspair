@@ -1,7 +1,7 @@
 <template>
   <div class="task-area">
     <div v-for="lane in lanes" :key="lane.id">
-      <Lane :lane="lane" @remove-lane="removeLane" />
+      <lane :lane="lane" @remove-lane="removeLane" />
     </div>
     <button @click="addNewLane">{{ $t("add-lane-button") }}</button>
   </div>
