@@ -1,6 +1,6 @@
 <template>
   <div class="person" draggable="true" @dragstart="startDrag($event)">
-    {{ person.name }}
+    {{ user.name }}
   </div>
 </template>
 
@@ -16,7 +16,7 @@ export default defineComponent({
   //   },
   //   person: Object,
   // },
-  props: ["person", "lane"],
+  props: ["user", "lane"],
   methods: {
     startDrag(evt: any, item: any) {
       evt.dataTransfer.dropEffect = "move";

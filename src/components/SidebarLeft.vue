@@ -8,13 +8,7 @@
       @dragover.prevent
       @dragenter.prevent
     >
-      <!-- <div v-for="person in persons" :key="person.id"> -->
-      <person
-        v-for="person in people"
-        v-bind:person="person"
-        :key="person.id"
-      ></person>
-      <!-- </div> -->
+      <person v-for="user in users" v-bind:user="user" :key="user.id"></person>
     </div>
   </div>
 </template>
@@ -25,7 +19,7 @@ import Person from "./Person.vue";
 
 export default defineComponent({
   components: { Person },
-  props: ["people"],
+  props: ["users"],
   methods: {
     onDrop(evt: any, person: any) {
       // const itemID = evt.dataTransfer.getData("itemID");

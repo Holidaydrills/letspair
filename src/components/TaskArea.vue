@@ -18,7 +18,7 @@ export default defineComponent({
       lanes: [
         {
           id: uuidv4(),
-          people: [
+          users: [
             {
               id: uuidv4(),
               name: "Randy",
@@ -32,7 +32,7 @@ export default defineComponent({
         },
         {
           id: uuidv4(),
-          people: [
+          users: [
             {
               id: uuidv4(),
               name: "Todd",
@@ -51,7 +51,7 @@ export default defineComponent({
     addNewLane() {
       this.lanes.push({
         id: uuidv4(),
-        people: [],
+        users: [],
         tasks: ["Task 5", "Task 6"],
       });
     },

@@ -1,11 +1,11 @@
-import { Person } from "@/models/Person";
+import { User } from "@/models/User";
 
-const people: Array<Person> = [
-  new Person("123", "Harry"),
-  new Person("456", "Thomas"),
-  new Person("789", "Luka"),
-  new Person("789", "Henry"),
+const users: Array<User> = [
+  new User("123", "Harry"),
+  new User("456", "Thomas"),
+  new User("789", "Luka"),
+  new User("781", "Henry"),
 ];
-export function getAllUsers(): Array<Person> {
-  return people;
+export function getAllUsers(): Array<User> {
+  return users;
 }

@@ -8,9 +8,9 @@
     <div>
       <p>{{ lane.id }}</p>
       <person
-        v-for="person in lane.people"
-        v-bind:person="person"
-        :key="person"
+        v-for="user in lane.users"
+        v-bind:user="user"
+        :key="user.id"
       ></person>
     </div>
   </div>

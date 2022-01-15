@@ -4,7 +4,7 @@
       <p>Test</p>
     </div>
     <div class="left-sidebar">
-      <sidebar-left :people="users" />
+      <sidebar-left :users="users" />
     </div>
     <div class="content-area">
       <task-area />
@@ -22,34 +22,27 @@
 import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./TaskArea.vue";
 import SidebarLeft from "./SidebarLeft.vue";
-import { getAllUsers } from "../services/UserService";
-import { Person } from "../models/Person";
+import { User } from "../models/User";
+import { getAllUsers } from "@/services/UserService";
 
 export default defineComponent({
   components: { TaskArea, SidebarLeft },
   data() {
     return {
-      users: new Array<Person>(),
-      //   users: [
-      //     new Person("123", "Harry"),
-      //     new Person("456", "Thomas"),
-      //     new Person("789", "Luka"),
-      //   ],
+      users: new Array<User>(),
     };
   },
   methods: {
     getAllUsers() {
+      //this.$store.commit("getAllUsers");
+      // this.users = this.$store.state.users;
+      // console.log(this.$store.state.users);
       this.users = getAllUsers();
       console.log(this.users);
-    },
-    testStore() {
-      this.$store.commit("increment");
-      console.log(this.$store.state.count);
     },
   },
   mounted() {
     this.getAllUsers();
-    this.testStore();
   },
 });
 </script>

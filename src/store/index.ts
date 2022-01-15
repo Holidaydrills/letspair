@@ -1,16 +1,18 @@
+import { User } from "@/models/User";
 import { createStore } from "vuex";
+import { getAllUsers } from "@/services/UserService";
 
 export type State = {
-  count: number;
+  users: Array<User>;
 };
 
 export const store = createStore({
   state(): State {
-    return { count: 0 };
+    return { users: [] };
   },
   mutations: {
-    increment(state: State) {
-      state.count++;
+    getAllUsers(state: State) {
+      state.users = getAllUsers();
     },
   },
 });
