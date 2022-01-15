@@ -38,13 +38,18 @@ export default defineComponent({
     };
   },
   methods: {
-    getAllUsers: function () {
+    getAllUsers() {
       this.users = getAllUsers();
       console.log(this.users);
+    },
+    testStore() {
+      this.$store.commit("increment");
+      console.log(this.$store.state.count);
     },
   },
   mounted() {
     this.getAllUsers();
+    this.testStore();
   },
 });
 </script>
