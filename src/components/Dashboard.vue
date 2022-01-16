@@ -23,23 +23,38 @@ import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./TaskArea.vue";
 import SidebarLeft from "./SidebarLeft.vue";
 import { User } from "@/models/User";
-import { getAllUsers } from "@/services/UserService";
+import { useStore } from "vuex";
+import { ref, onMounted } from "vue";
+import { key } from "@/store";
 
 export default defineComponent({
   components: { TaskArea, SidebarLeft },
-  data() {
-    return {
-      users: new Array<User>(),
-    };
-  },
-  methods: {
-    getAllUsers() {
-      this.$store.commit("getAllUsers");
-      this.users = this.$store.state.users;
-    },
-  },
+  // data() {
+  //   return {
+  //     users: new Array<User>(),
+  //   };
+  // },
+  // methods: {
+  //   getAllUsers() {
+  //     this.$store.commit("getAllUsers");
+  //     this.users = this.$store.state.users;
+  //   },
+  // },
   mounted() {
     this.getAllUsers();
+  },
+  setup() {
+    const store = useStore(key);
+    const users = ref(new Array<User>());
+    const getAllUsers = () => {
+      store.commit("getAllUsers");
+      users.value = store.state.users;
+    };
+    onMounted(getAllUsers);
+    return {
+      users,
+      getAllUsers,
+    };
   },
 });
 </script>
