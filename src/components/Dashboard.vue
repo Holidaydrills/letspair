@@ -34,11 +34,8 @@ export default defineComponent({
   },
   methods: {
     getAllUsers() {
-      //this.$store.commit("getAllUsers");
-      // this.users = this.$store.state.users;
-      // console.log(this.$store.state.users);
-      this.users = getAllUsers();
-      console.log(this.users);
+      this.$store.commit("getAllUsers");
+      this.users = this.$store.state.users;
     },
   },
   mounted() {
