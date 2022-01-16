@@ -22,7 +22,7 @@
 import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./TaskArea.vue";
 import SidebarLeft from "./SidebarLeft.vue";
-import { User } from "../models/User";
+import { User } from "@/models/User";
 import { getAllUsers } from "@/services/UserService";
 
 export default defineComponent({

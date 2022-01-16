@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
-import Dashboard from "./components/Dashboard.vue";
+import Dashboard from "@/components/Dashboard.vue";
 
 export default defineComponent({
   components: { Dashboard },
