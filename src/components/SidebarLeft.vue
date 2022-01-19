@@ -1,5 +1,6 @@
 <template>
   <div>Tasks</div>
+  <task v-for="task in tasks" v-bind:task="task" :key="task.id"></task>
   <div>
     Users
     <div
@@ -16,10 +17,11 @@
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
 import Person from "./Person.vue";
+import Task from "./Task.vue";
 
 export default defineComponent({
-  components: { Person },
-  props: ["users"],
+  components: { Task, Person },
+  props: ["tasks", "users"],
   methods: {
     onDrop(evt: any, person: any) {
       // const itemID = evt.dataTransfer.getData("itemID");

@@ -1,6 +1,6 @@
 <template>
-  <div class="person" draggable="true" @dragstart="startDrag($event)">
-    {{ user.name }}
+  <div class="task" draggable="true" @dragstart="startDrag($event)">
+    {{ task.description }}
   </div>
 </template>
 
@@ -8,16 +8,15 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  emits: ["removeLane"],
-  props: ["user", "lane"],
+  props: ["task"],
   methods: {
     startDrag(evt: any, item: any) {
       evt.dataTransfer.dropEffect = "move";
       evt.dataTransfer.effectAllowed = "move";
-      evt.dataTransfer.setData("itemID", "New Person");
+      evt.dataTransfer.setData("itemID", "New Task");
     },
-    onDrop(evt: any, person: any) {
-      alert(`Dropped ${this.lane.people}`);
+    onDrop(evt: any, task: any) {
+      alert(`Dropped ${this.task.description}`);
     },
   },
 });
