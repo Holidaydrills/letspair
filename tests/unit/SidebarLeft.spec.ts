@@ -1,10 +1,16 @@
 import { expect } from "chai";
-import { shallowMount } from "@vue/test-utils";
+import { mount, shallowMount } from "@vue/test-utils";
 import SidebarLeft from "@/components/SidebarLeft.vue";
 import Person from "@/components/Person.vue";
 import { User } from "@/models/User";
 
 describe("SidebarLeft.vue", () => {
+  it("renders two sections, one for Tasks and one for users", () => {
+    const wrapper = shallowMount(SidebarLeft, {});
+    const text = wrapper.text();
+    expect(text).to.contain("Users");
+    expect(text).to.contain("Tasks");
+  });
   it("renders props.users when passed", () => {
     const name1 = "Luka";
     const name2 = "Bento";
@@ -18,12 +24,12 @@ describe("SidebarLeft.vue", () => {
         name: name2,
       },
     ];
-    const wrapper = shallowMount(SidebarLeft, {
+    const wrapper = mount(SidebarLeft, {
       props: { users },
     });
-    // const text = wrapper.text();
-    // expect(text).to.contain(name1);
-    // expect(text).to.contain(name2);
     expect(wrapper.findAllComponents(Person)).lengthOf(2);
+    const text = wrapper.text();
+    expect(text).to.contain(name1);
+    expect(text).to.contain(name2);
   });
 });

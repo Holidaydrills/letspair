@@ -1,7 +1,7 @@
 <template>
   <div>Tasks</div>
   <div>
-    Persons
+    Users
     <div
       class="person-area"
       @drop="onDrop($event, 1)"
