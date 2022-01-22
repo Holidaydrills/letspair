@@ -6,30 +6,31 @@
     @dragenter.prevent
   >
     <div>
-      <p>{{ lane.id }}</p>
-      <person
-        v-for="user in lane.users"
-        v-bind:user="user"
-        :key="user.id"
-      ></person>
+      <p>{{ laneId }}</p>
+      <task v-for="task in tasks" v-bind:task="task" :key="task.id"></task>
+    </div>
+    <div>
+      <p>{{ laneId }}</p>
+      <person v-for="user in users" v-bind:user="user" :key="user.id"></person>
     </div>
   </div>
-  <button @click="$emit('removeLane', lane.id)">Remove lane</button>
+  <button @click="$emit('removeLane', laneId)">Remove lane</button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import Person from "./Person.vue";
+import Task from "./Task.vue";
 
 export default defineComponent({
-  components: { Person },
+  components: { Person, Task },
   emits: ["removeLane"],
-  props: {
-    lane: {
-      type: Object,
-      required: true,
-    },
+  data() {
+    return {
+      laneId: "123",
+    };
   },
+  props: ["users", "tasks"],
   methods: {
     startDrag(evt: any, item: any) {
       evt.dataTransfer.dropEffect = "move";
@@ -39,7 +40,7 @@ export default defineComponent({
     onDrop(evt: any, person: any) {
       // const itemID = evt.dataTransfer.getData("itemID");
       // this.lane.people.push("New Person");
-      alert(`Dropped ${this.lane.people}`);
+      alert(`Dropped ${this.laneId}`);
     },
   },
 });

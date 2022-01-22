@@ -1,18 +1,18 @@
 <template>
   <div class="task-area">
     <div v-for="lane in lanes" :key="lane.id">
-      <lane :lane="lane" @remove-lane="removeLane" />
+      <pairing-lane :lane="lane" @remove-lane="removeLane" />
     </div>
     <button @click="addNewLane">{{ $t("add-lane-button") }}</button>
   </div>
 </template>
 
 <script lang="ts">
-import Lane from "./Lane.vue";
+import PairingLane from "./PairingLane.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  components: { Lane },
+  components: { PairingLane },
   data() {
     return {
       lanes: [
