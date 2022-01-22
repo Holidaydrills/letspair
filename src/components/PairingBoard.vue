@@ -26,20 +26,30 @@ import { User } from "@/models/User";
 import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
 import { key } from "@/store";
+import { Task } from "@/models/Task";
 
 export default defineComponent({
   components: { TaskArea, SidebarLeft },
   setup() {
     const store = useStore(key);
     const users = ref(new Array<User>());
+    const tasks = ref(new Array<Task>());
     const getAllUsers = () => {
       store.commit("getAllUsers");
       users.value = store.state.users;
     };
-    onMounted(getAllUsers);
+    const getAllTasks = () => {
+      store.commit("getAllTasks");
+      tasks.value = store.state.tasks;
+    };
+    onMounted(() => {
+      getAllUsers();
+      getAllTasks();
+    });
     return {
       users,
       getAllUsers,
+      getAllTasks,
     };
   },
 });
