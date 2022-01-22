@@ -1,10 +1,10 @@
 <template>
-  <div>Tasks</div>
-  <pairing-task
-    v-for="task in tasks"
-    v-bind:task="task"
-    :key="task.id"
-  ></pairing-task>
+  <div>
+    Tasks
+    <div class="person-area">
+      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
+    </div>
+  </div>
   <div>
     Users
     <div
@@ -13,11 +13,7 @@
       @dragover.prevent
       @dragenter.prevent
     >
-      <pairing-user
-        v-for="user in users"
-        v-bind:user="user"
-        :key="user.id"
-      ></pairing-user>
+      <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
     </div>
   </div>
 </template>

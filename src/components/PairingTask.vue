@@ -8,22 +8,13 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  emits: ["removeLane"],
   props: ["task"],
-  methods: {
-    startDrag(evt: any, item: any) {
-      evt.dataTransfer.dropEffect = "move";
-      evt.dataTransfer.effectAllowed = "move";
-      evt.dataTransfer.setData("itemID", "New Task");
-    },
-    onDrop(evt: any, task: any) {
-      alert(`Dropped ${this.task.description}`);
-    },
-  },
 });
 </script>
 
 <style lang="scss">
-.person {
+.task {
   height: 2em;
   min-width: 100px;
   display: inline-block;

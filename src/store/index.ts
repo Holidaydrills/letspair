@@ -23,6 +23,7 @@ export const store = createStore({
     },
     getAllTasks(state: State) {
       state.tasks = getAllTasks();
+      console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
     },
   },
 });

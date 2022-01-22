@@ -41,6 +41,7 @@ export default defineComponent({
     const getAllTasks = () => {
       store.commit("getAllTasks");
       tasks.value = store.state.tasks;
+      console.log(`tasks.value: ${JSON.stringify(tasks.value)}`);
     };
     onMounted(() => {
       getAllUsers();
@@ -48,6 +49,7 @@ export default defineComponent({
     });
     return {
       users,
+      tasks,
       getAllUsers,
       getAllTasks,
     };
