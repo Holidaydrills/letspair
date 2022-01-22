@@ -1,6 +1,10 @@
 <template>
   <div>Tasks</div>
-  <task v-for="task in tasks" v-bind:task="task" :key="task.id"></task>
+  <pairing-task
+    v-for="task in tasks"
+    v-bind:task="task"
+    :key="task.id"
+  ></pairing-task>
   <div>
     Users
     <div
@@ -9,18 +13,22 @@
       @dragover.prevent
       @dragenter.prevent
     >
-      <person v-for="user in users" v-bind:user="user" :key="user.id"></person>
+      <pairing-user
+        v-for="user in users"
+        v-bind:user="user"
+        :key="user.id"
+      ></pairing-user>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
-import Person from "./Person.vue";
-import Task from "./Task.vue";
+import PairingUser from "./PairingUser.vue";
+import PairingTask from "./PairingTask.vue";
 
 export default defineComponent({
-  components: { Task, Person },
+  components: { PairingTask, PairingUser },
   props: ["tasks", "users"],
   methods: {
     onDrop(evt: any, person: any) {

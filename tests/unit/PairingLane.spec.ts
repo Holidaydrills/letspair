@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { mount } from "@vue/test-utils";
 import PairingLane from "@/components/PairingLane.vue";
-import Person from "@/components/Person.vue";
+import PairingUser from "@/components/PairingUser.vue";
+import PairingTask from "@/components/PairingTask.vue";
 import { User } from "@/models/User";
 import { Task } from "@/models/Task";
 
@@ -22,7 +23,7 @@ describe("PairingLane.vue", () => {
     const wrapper = mount(PairingLane, {
       props: { tasks },
     });
-    expect(wrapper.findAllComponents(Task)).lengthOf(2);
+    expect(wrapper.findAllComponents(PairingTask)).lengthOf(2);
     const text = wrapper.text();
     expect(text).to.contain(description1);
     expect(text).to.contain(description2);
@@ -44,7 +45,7 @@ describe("PairingLane.vue", () => {
     const wrapper = mount(PairingLane, {
       props: { users },
     });
-    expect(wrapper.findAllComponents(Person)).lengthOf(2);
+    expect(wrapper.findAllComponents(PairingUser)).lengthOf(2);
     const text = wrapper.text();
     expect(text).to.contain(name1);
     expect(text).to.contain(name2);

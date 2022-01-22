@@ -1,7 +1,8 @@
 import { expect } from "chai";
 import { mount, shallowMount } from "@vue/test-utils";
 import SidebarLeft from "@/components/SidebarLeft.vue";
-import Person from "@/components/Person.vue";
+import PairingUser from "@/components/PairingUser.vue";
+import PairingTask from "@/components/PairingTask.vue";
 import { User } from "@/models/User";
 import { Task } from "@/models/Task";
 
@@ -29,7 +30,7 @@ describe("SidebarLeft.vue", () => {
     const wrapper = mount(SidebarLeft, {
       props: { users },
     });
-    expect(wrapper.findAllComponents(Person)).lengthOf(2);
+    expect(wrapper.findAllComponents(PairingUser)).lengthOf(2);
     const text = wrapper.text();
     expect(text).to.contain(name1);
     expect(text).to.contain(name2);
@@ -51,7 +52,7 @@ describe("SidebarLeft.vue", () => {
     const wrapper = mount(SidebarLeft, {
       props: { tasks },
     });
-    expect(wrapper.findAllComponents(Task)).lengthOf(2);
+    expect(wrapper.findAllComponents(PairingTask)).lengthOf(2);
     const text = wrapper.text();
     expect(text).to.contain(description1);
     expect(text).to.contain(description2);

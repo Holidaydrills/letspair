@@ -7,11 +7,11 @@
   >
     <div>
       <p>{{ laneId }}</p>
-      <task v-for="task in tasks" v-bind:task="task" :key="task.id"></task>
+      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
     </div>
     <div>
       <p>{{ laneId }}</p>
-      <person v-for="user in users" v-bind:user="user" :key="user.id"></person>
+      <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
     </div>
   </div>
   <button @click="$emit('removeLane', laneId)">Remove lane</button>
@@ -19,11 +19,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Person from "./Person.vue";
-import Task from "./Task.vue";
+import PairingUser from "./PairingUser.vue";
+import PairingTask from "./PairingTask.vue";
 
 export default defineComponent({
-  components: { Person, Task },
+  components: { PairingUser, PairingTask },
   emits: ["removeLane"],
   data() {
     return {
