@@ -29,20 +29,6 @@ import { key } from "@/store";
 
 export default defineComponent({
   components: { TaskArea, SidebarLeft },
-  // data() {
-  //   return {
-  //     users: new Array<User>(),
-  //   };
-  // },
-  // methods: {
-  //   getAllUsers() {
-  //     this.$store.commit("getAllUsers");
-  //     this.users = this.$store.state.users;
-  //   },
-  // },
-  mounted() {
-    this.getAllUsers();
-  },
   setup() {
     const store = useStore(key);
     const users = ref(new Array<User>());
