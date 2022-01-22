@@ -1,8 +1,8 @@
 export class User {
   public id: string;
   public name: string;
-  public laneId: string;
-  public notAvailable: boolean;
+  public laneId?: string;
+  public notAvailable?: boolean;
 
   constructor(
     id: string,

@@ -4,7 +4,7 @@
       <p>Test</p>
     </div>
     <div class="left-sidebar">
-      <sidebar-left :users="users" />
+      <sidebar-left :users="users" :tasks="tasks" />
     </div>
     <div class="content-area">
       <task-area />
