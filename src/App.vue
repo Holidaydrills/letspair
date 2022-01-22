@@ -1,15 +1,15 @@
 <template>
   <div id="app">
-    <dashboard />
+    <pairing-board />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "@vue/runtime-core";
-import Dashboard from "@/components/Dashboard.vue";
+import PairingBoard from "@/components/PairingBoard.vue";
 
 export default defineComponent({
-  components: { Dashboard },
+  components: { PairingBoard },
 });
 </script>
 
