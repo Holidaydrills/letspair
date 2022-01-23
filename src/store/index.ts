@@ -27,11 +27,11 @@ export const store = createStore({
     },
   },
   actions: {
-    getAllUsers({ commit }) {
-      getAllUsers().then((users: Array<User>) => commit("getAllUsers", users));
+    async getAllUsers({ commit }) {
+      commit("getAllUsers", await getAllUsers());
     },
-    getAllTasks({ commit }) {
-      getAllTasks().then((tasks: Array<Task>) => commit("getAllTasks", tasks));
+    async getAllTasks({ commit }) {
+      commit("getAllTasks", await getAllTasks());
     },
   },
 });

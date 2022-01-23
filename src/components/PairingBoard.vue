@@ -34,14 +34,13 @@ export default defineComponent({
     const store = useStore(key);
     const users = ref(new Array<User>());
     const tasks = ref(new Array<Task>());
-    const getAllUsers = () => {
-      store.dispatch("getAllUsers");
+    const getAllUsers = async () => {
+      await store.dispatch("getAllUsers");
       users.value = store.state.users;
     };
-    const getAllTasks = () => {
-      store.dispatch("getAllTasks");
+    const getAllTasks = async () => {
+      await store.dispatch("getAllTasks");
       tasks.value = store.state.tasks;
-      console.log(`tasks.value: ${JSON.stringify(tasks.value)}`);
     };
     onMounted(() => {
       getAllUsers();
