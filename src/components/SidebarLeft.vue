@@ -22,17 +22,26 @@
 import { defineComponent } from "@vue/runtime-core";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
+import { useStore } from "vuex";
+import { key } from "@/store";
+import { computed } from "vue";
 
 export default defineComponent({
   components: { PairingTask, PairingUser },
-  props: ["tasks", "users"],
-  methods: {
-    onDrop(evt: any, person: any) {
-      // const itemID = evt.dataTransfer.getData("itemID");
-      // this.lane.people.push("New Person");
-      alert(`Dropped this`);
-    },
+  setup() {
+    const store = useStore(key);
+    return {
+      tasks: computed(() => store.state.tasks),
+      users: computed(() => store.state.users),
+    };
   },
+  // methods: {
+  //   onDrop(evt: any, person: any) {
+  //     // const itemID = evt.dataTransfer.getData("itemID");
+  //     // this.lane.people.push("New Person");
+  //     alert(`Dropped this`);
+  //   },
+  // },
 });
 </script>
 
