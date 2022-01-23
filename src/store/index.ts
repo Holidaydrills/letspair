@@ -26,4 +26,12 @@ export const store = createStore({
       console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
     },
   },
+  actions: {
+    getAllUsers({ commit }) {
+      commit("getAllUsers");
+    },
+    getAllTasks({ commit }) {
+      commit("getAllTasks");
+    },
+  },
 });

@@ -5,6 +5,8 @@ import PairingUser from "@/components/PairingUser.vue";
 import PairingTask from "@/components/PairingTask.vue";
 import { User } from "@/models/User";
 import { Task } from "@/models/Task";
+import { key } from "@/store";
+import { createStore } from "vuex";
 
 describe("SidebarLeft.vue", () => {
   it("renders two sections, one for Tasks and one for users", () => {
@@ -14,21 +16,26 @@ describe("SidebarLeft.vue", () => {
     expect(text).to.contain("Tasks");
   });
 
-  it("renders props.users when passed", () => {
+  it("renders users correctly", () => {
     const name1 = "Luka";
     const name2 = "Bento";
-    const users: Array<User> = [
-      {
-        id: "1",
-        name: name1,
-      },
-      {
-        id: "1",
-        name: name2,
-      },
-    ];
+    // const users: Array<User> = [
+    //   {
+    //     id: "1",
+    //     name: name1,
+    //   },
+    //   {
+    //     id: "1",
+    //     name: name2,
+    //   },
+    // ];
+    const store = createStore({
+      /* ... */
+    });
     const wrapper = mount(SidebarLeft, {
-      props: { users },
+      global: {
+        plugins: [[store, key]],
+      },
     });
     expect(wrapper.findAllComponents(PairingUser)).lengthOf(2);
     const text = wrapper.text();

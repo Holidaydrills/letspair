@@ -35,11 +35,11 @@ export default defineComponent({
     const users = ref(new Array<User>());
     const tasks = ref(new Array<Task>());
     const getAllUsers = () => {
-      store.commit("getAllUsers");
+      store.dispatch("getAllUsers");
       users.value = store.state.users;
     };
     const getAllTasks = () => {
-      store.commit("getAllTasks");
+      store.dispatch("getAllTasks");
       tasks.value = store.state.tasks;
       console.log(`tasks.value: ${JSON.stringify(tasks.value)}`);
     };
