@@ -4,8 +4,8 @@ const users: Array<User> = [
   new User("123", "Harry"),
   new User("456", "Thomas"),
   new User("789", "Luka"),
-  new User("781", "Henry"),
+  new User("781", "Blub"),
 ];
-export function getAllUsers(): Array<User> {
-  return users;
+export async function getAllUsers(): Promise<Array<User>> {
+  return Promise.resolve(users);
 }

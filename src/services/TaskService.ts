@@ -6,6 +6,6 @@ const tasks: Array<Task> = [
   new Task("789", "Important task 3"),
   new Task("781", "Important task 4"),
 ];
-export function getAllTasks(): Array<Task> {
-  return tasks;
+export async function getAllTasks(): Promise<Array<Task>> {
+  return Promise.resolve(tasks);
 }

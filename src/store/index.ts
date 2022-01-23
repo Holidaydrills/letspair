@@ -18,20 +18,20 @@ export const store = createStore({
     return { users: [], tasks: [] };
   },
   mutations: {
-    getAllUsers(state: State) {
-      state.users = getAllUsers();
+    getAllUsers(state: State, users: Array<User>) {
+      state.users = users;
     },
-    getAllTasks(state: State) {
-      state.tasks = getAllTasks();
+    getAllTasks(state: State, tasks: Array<Task>) {
+      state.tasks = tasks;
       console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
     },
   },
   actions: {
     getAllUsers({ commit }) {
-      commit("getAllUsers");
+      getAllUsers().then((users: Array<User>) => commit("getAllUsers", users));
     },
     getAllTasks({ commit }) {
-      commit("getAllTasks");
+      getAllTasks().then((tasks: Array<Task>) => commit("getAllTasks", tasks));
     },
   },
 });
