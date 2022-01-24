@@ -10,12 +10,17 @@ import { createStore } from "vuex";
 import { options } from "@/store/storeConfig";
 
 describe("SidebarLeft.vue", () => {
-  // it("renders two sections, one for Tasks and one for users", () => {
-  //   const wrapper = shallowMount(SidebarLeft, {});
-  //   const text = wrapper.text();
-  //   expect(text).to.contain("Users");
-  //   expect(text).to.contain("Tasks");
-  // });
+  it("renders two sections, one for Tasks and one for users", () => {
+    const store = createStore(options);
+    const wrapper = shallowMount(SidebarLeft, {
+      global: {
+        plugins: [[store, key]],
+      },
+    });
+    const text = wrapper.text();
+    expect(text).to.contain("Users");
+    expect(text).to.contain("Tasks");
+  });
 
   it("renders users correctly", async () => {
     const name1 = "Luka";
@@ -48,25 +53,34 @@ describe("SidebarLeft.vue", () => {
     expect(text).to.contain(name2);
   });
 
-  // it("renders props.tasks when passed", () => {
-  //   const description1 = "Important task";
-  //   const description2 = "Very important task";
-  //   const tasks: Array<Task> = [
-  //     {
-  //       id: "1",
-  //       description: description1,
-  //     },
-  //     {
-  //       id: "1",
-  //       description: description2,
-  //     },
-  //   ];
-  //   const wrapper = mount(SidebarLeft, {
-  //     props: { tasks },
-  //   });
-  //   expect(wrapper.findAllComponents(PairingTask)).lengthOf(2);
-  //   const text = wrapper.text();
-  //   expect(text).to.contain(description1);
-  //   expect(text).to.contain(description2);
-  // });
+  it("renders props.tasks when passed", () => {
+    const description1 = "Important task";
+    const description2 = "Very important task";
+    const storeOptions = options;
+    storeOptions.state = () => {
+      return {
+        users: [],
+        tasks: [
+          {
+            id: "1",
+            description: description1,
+          },
+          {
+            id: "1",
+            description: description2,
+          },
+        ],
+      };
+    };
+    const store = createStore(storeOptions);
+    const wrapper = mount(SidebarLeft, {
+      global: {
+        plugins: [[store, key]],
+      },
+    });
+    expect(wrapper.findAllComponents(PairingTask)).lengthOf(2);
+    const text = wrapper.text();
+    expect(text).to.contain(description1);
+    expect(text).to.contain(description2);
+  });
 });
