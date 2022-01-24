@@ -23,15 +23,14 @@ import { defineComponent } from "@vue/runtime-core";
 import TaskArea from "./TaskArea.vue";
 import SidebarLeft from "./SidebarLeft.vue";
 import { User } from "@/models/User";
-import { useStore } from "vuex";
 import { ref, onMounted } from "vue";
-import { key } from "@/store";
+import { useStore } from "@/store";
 import { Task } from "@/models/Task";
 
 export default defineComponent({
   components: { TaskArea, SidebarLeft },
   setup() {
-    const store = useStore(key);
+    const store = useStore();
     const users = ref(new Array<User>());
     const tasks = ref(new Array<Task>());
     const getAllUsers = async () => {

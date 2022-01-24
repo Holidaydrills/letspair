@@ -22,14 +22,13 @@
 import { defineComponent } from "@vue/runtime-core";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
-import { useStore } from "vuex";
-import { key } from "@/store";
+import { useStore } from "@/store";
 import { computed } from "vue";
 
 export default defineComponent({
   components: { PairingTask, PairingUser },
   setup() {
-    const store = useStore(key);
+    const store = useStore();
     return {
       tasks: computed(() => store.state.tasks),
       users: computed(() => store.state.users),
