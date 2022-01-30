@@ -3,8 +3,6 @@ import { mount, shallowMount } from "@vue/test-utils";
 import SidebarLeft from "@/components/SidebarLeft.vue";
 import PairingUser from "@/components/PairingUser.vue";
 import PairingTask from "@/components/PairingTask.vue";
-import PairingBoard from "@/components/PairingBoard.vue";
-import { Task } from "@/models/Task";
 import { key } from "@/store";
 import { createStore } from "vuex";
 import { options } from "@/store/storeConfig";
