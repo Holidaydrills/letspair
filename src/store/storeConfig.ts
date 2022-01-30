@@ -3,23 +3,31 @@ import { Task } from "@/models/Task";
 import { getAllUsers } from "@/services/UserService";
 import { getAllTasks } from "@/services/TaskService";
 import { StoreOptions } from "vuex";
+import { Lane } from "@/models/Lane";
 
 export type State = {
-  users: Array<User>;
-  tasks: Array<Task>;
+  availableUsers: Array<User>;
+  unavailableUsers: Array<User>;
+  openTasks: Array<Task>;
+  lanes: Array<Lane>;
 };
 
 export const options: StoreOptions<State> = {
   state(): State {
-    return { users: [], tasks: [] };
+    return {
+      availableUsers: [],
+      unavailableUsers: [],
+      openTasks: [],
+      lanes: [],
+    };
   },
   mutations: {
     getAllUsers(state: State, users: Array<User>) {
-      state.users = users;
+      state.availableUsers = users;
     },
     getAllTasks(state: State, tasks: Array<Task>) {
-      state.tasks = tasks;
-      console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
+      state.openTasks = tasks;
+      console.log(`state.tasks = ${JSON.stringify(state.openTasks)}`);
     },
   },
   actions: {

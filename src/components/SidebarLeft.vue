@@ -30,8 +30,8 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      tasks: computed(() => store.state.tasks),
-      users: computed(() => store.state.users),
+      tasks: computed(() => store.state.openTasks),
+      users: computed(() => store.state.availableUsers),
     };
   },
   // methods: {

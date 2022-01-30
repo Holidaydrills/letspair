@@ -26,7 +26,7 @@ describe("SidebarLeft.vue", () => {
     const storeOptions = options;
     storeOptions.state = () => {
       return {
-        users: [
+        availableUsers: [
           {
             id: "1",
             name: name1,
@@ -36,7 +36,9 @@ describe("SidebarLeft.vue", () => {
             name: name2,
           },
         ],
-        tasks: [],
+        unavailableUsers: [],
+        lanes: [],
+        openTasks: [],
       };
     };
     const store = createStore(storeOptions);
@@ -57,8 +59,10 @@ describe("SidebarLeft.vue", () => {
     const storeOptions = options;
     storeOptions.state = () => {
       return {
-        users: [],
-        tasks: [
+        availableUsers: [],
+        unavailableUsers: [],
+        lanes: [],
+        openTasks: [
           {
             id: "1",
             description: description1,
