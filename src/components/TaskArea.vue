@@ -1,72 +1,33 @@
 <template>
   <div class="task-area">
     <div v-for="lane in lanes" :key="lane.id">
-      <pairing-lane :lane="lane" @remove-lane="removeLane" />
+      <pairing-lane :lane="lane" />
     </div>
-    <button @click="addNewLane">{{ $t("add-lane-button") }}</button>
   </div>
 </template>
 
 <script lang="ts">
 import PairingLane from "./PairingLane.vue";
 import { defineComponent } from "vue";
+import { useStore } from "@/store";
+import { computed } from "vue";
 
 export default defineComponent({
   components: { PairingLane },
-  data() {
+  setup() {
+    const store = useStore();
     return {
-      lanes: [
-        {
-          id: uuidv4(),
-          users: [
-            {
-              id: uuidv4(),
-              name: "Randy",
-            },
-            {
-              id: uuidv4(),
-              name: "Michael",
-            },
-          ],
-          tasks: ["Task 1", "Task 2"],
-        },
-        {
-          id: uuidv4(),
-          users: [
-            {
-              id: uuidv4(),
-              name: "Todd",
-            },
-            {
-              id: uuidv4(),
-              name: "Brono",
-            },
-          ],
-          tasks: ["Task 3", "Task 4"],
-        },
-      ],
+      lanes: computed(() => store.state.lanes),
     };
   },
-  methods: {
-    addNewLane() {
-      this.lanes.push({
-        id: uuidv4(),
-        users: [],
-        tasks: ["Task 5", "Task 6"],
-      });
-    },
-    removeLane(id: string) {
-      this.lanes = this.lanes.filter((lane) => lane.id !== id);
-    },
-  },
 });
-function uuidv4() {
-  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
-      v = c == "x" ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-}
+// function uuidv4() {
+//   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+//     var r = (Math.random() * 16) | 0,
+//       v = c == "x" ? r : (r & 0x3) | 0x8;
+//     return v.toString(16);
+//   });
+// }
 </script>
 
 <style lang="scss">

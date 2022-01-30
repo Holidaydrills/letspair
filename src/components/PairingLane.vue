@@ -6,12 +6,20 @@
     @dragenter.prevent
   >
     <div>
-      <p>{{ laneId }}</p>
-      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
+      <p>{{ lane.id }}</p>
+      <pairing-task
+        v-for="task in lane.tasks"
+        v-bind:task="task"
+        :key="task.id"
+      />
     </div>
     <div>
-      <p>{{ laneId }}</p>
-      <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
+      <p>{{ lane.id }}</p>
+      <pairing-user
+        v-for="user in lane.users"
+        v-bind:user="user"
+        :key="user.id"
+      />
     </div>
   </div>
   <button @click="$emit('removeLane', laneId)">Remove lane</button>
@@ -21,16 +29,21 @@
 import { defineComponent } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
+import { useStore } from "@/store";
 
 export default defineComponent({
   components: { PairingUser, PairingTask },
+  props: ["lane"],
+  setup() {
+    const store = useStore();
+    return {};
+  },
   emits: ["removeLane"],
   data() {
     return {
       laneId: "123",
     };
   },
-  props: ["users", "tasks"],
   methods: {
     startDrag(evt: any, item: any) {
       evt.dataTransfer.dropEffect = "move";
