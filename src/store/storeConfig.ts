@@ -2,6 +2,7 @@ import { User } from "@/models/User";
 import { Task } from "@/models/Task";
 import { getAllUsers } from "@/services/UserService";
 import { getAllTasks } from "@/services/TaskService";
+import { addNewLane } from "@/services/PairingBoardService";
 import { StoreOptions } from "vuex";
 import { Lane } from "@/models/Lane";
 
@@ -29,6 +30,9 @@ export const options: StoreOptions<State> = {
       state.openTasks = tasks;
       console.log(`state.tasks = ${JSON.stringify(state.openTasks)}`);
     },
+    addNewLane(state: State, lane: Lane) {
+      state.lanes.push(lane);
+    },
   },
   actions: {
     async getAllUsers({ commit }) {
@@ -36,6 +40,9 @@ export const options: StoreOptions<State> = {
     },
     async getAllTasks({ commit }) {
       commit("getAllTasks", await getAllTasks());
+    },
+    async addNewLane({ commit }) {
+      commit("addNewLane", await addNewLane());
     },
   },
 };
