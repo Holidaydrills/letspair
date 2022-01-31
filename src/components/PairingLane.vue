@@ -26,17 +26,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, toRefs } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
+import { Task } from "@/models/Task";
 
 export default defineComponent({
   components: { PairingUser, PairingTask },
   props: ["lane"],
-  setup() {
+  setup(props) {
     const store = useStore();
-    return {};
+    const onDrop = (evt: any, item: any) => {
+      const taskDescription = evt.dataTransfer.getData("taskDescription");
+      if (taskDescription) {
+        store.dispatch("addTaskToLane", new Task("123", taskDescription));
+        console.log(
+          `Dropped item description ${evt.dataTransfer.getData(
+            "taskDescription"
+          )}`
+        );
+      }
+    };
+    return {
+      onDrop,
+    };
   },
   emits: ["removeLane"],
   data() {
@@ -49,15 +63,6 @@ export default defineComponent({
       evt.dataTransfer.dropEffect = "move";
       evt.dataTransfer.effectAllowed = "move";
       evt.dataTransfer.setData("itemID", "New Person");
-    },
-    onDrop(evt: any, task: any) {
-      // const itemID = evt.dataTransfer.getData("itemID");
-      // this.lane.people.push("New Person");
-      console.log(`Event: ${JSON.stringify(evt)}`);
-      console.log(`person: ${JSON.stringify(task)}`);
-      const itemID = evt.dataTransfer.getData("itemID");
-      console.log(`Item ID: ${itemID}`);
-      alert(`Dropped ${this.laneId}`);
     },
   },
 });

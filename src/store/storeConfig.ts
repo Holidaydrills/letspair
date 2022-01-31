@@ -32,6 +32,11 @@ export const options: StoreOptions<State> = {
     },
     addNewLane(state: State, lane: Lane) {
       state.lanes.push(lane);
+      console.log(`Add new lane: ${JSON.stringify(lane)}`);
+    },
+    addTaskToLane(state: State, task: Task) {
+      state.lanes[0].tasks = [task];
+      console.log(`Added task to lane: ${JSON.stringify(state.lanes)}`);
     },
   },
   actions: {
@@ -43,6 +48,10 @@ export const options: StoreOptions<State> = {
     },
     async addNewLane({ commit }) {
       commit("addNewLane", await addNewLane());
+    },
+
+    async addTaskToLane({ commit }, task: Task) {
+      commit("addTaskToLane", task);
     },
   },
 };

@@ -19,7 +19,7 @@ export default defineComponent({
           )}; item: ${JSON.stringify(task)}`
         )
       );
-      evt.dataTransfer.setData("itemID", task.description);
+      evt.dataTransfer.setData("taskDescription", task.description);
     };
     return {
       startDrag,
