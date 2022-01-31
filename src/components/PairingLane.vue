@@ -50,9 +50,13 @@ export default defineComponent({
       evt.dataTransfer.effectAllowed = "move";
       evt.dataTransfer.setData("itemID", "New Person");
     },
-    onDrop(evt: any, person: any) {
+    onDrop(evt: any, task: any) {
       // const itemID = evt.dataTransfer.getData("itemID");
       // this.lane.people.push("New Person");
+      console.log(`Event: ${JSON.stringify(evt)}`);
+      console.log(`person: ${JSON.stringify(task)}`);
+      const itemID = evt.dataTransfer.getData("itemID");
+      console.log(`Item ID: ${itemID}`);
       alert(`Dropped ${this.laneId}`);
     },
   },
