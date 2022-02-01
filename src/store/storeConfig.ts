@@ -37,9 +37,9 @@ export const options: StoreOptions<State> = {
     addTaskToLane(state: State, task: Task) {
       if (state.lanes[0].tasks) {
         state.lanes[0].tasks.push(task);
-        return;
+      } else {
+        state.lanes[0].tasks = [task];
       }
-      state.lanes[0].tasks = [task];
       const taskId = task.id;
       const filtered = state.openTasks.filter((task) => task.id !== taskId);
       state.openTasks = filtered;
