@@ -38,14 +38,10 @@ export default defineComponent({
   setup(props) {
     const store = useStore();
     const onDrop = (evt: any, item: any) => {
-      const taskDescription = evt.dataTransfer.getData("taskDescription");
-      if (taskDescription) {
-        store.dispatch("addTaskToLane", new Task("123", taskDescription));
-        console.log(
-          `Dropped item description ${evt.dataTransfer.getData(
-            "taskDescription"
-          )}`
-        );
+      const taskAsJson = evt.dataTransfer.getData("task");
+      if (taskAsJson) {
+        store.dispatch("addTaskToLane", JSON.parse(taskAsJson));
+        console.log(`Dropped item description ${taskAsJson}`);
       }
     };
     return {

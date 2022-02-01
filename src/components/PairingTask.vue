@@ -21,7 +21,7 @@ export default defineComponent({
           )}; item: ${JSON.stringify(task)}`
         )
       );
-      evt.dataTransfer.setData("taskDescription", task.description);
+      evt.dataTransfer.setData("task", JSON.stringify(task));
     };
     return {
       startDrag,
