@@ -1,6 +1,8 @@
 <template>
-  <div class="task" draggable="true" @dragstart="startDrag($event, task)">
-    {{ task.description }}
+  <div class="task-wrapper">
+    <div class="task" draggable="true" @dragstart="startDrag($event, task)">
+      {{ task.description }}
+    </div>
   </div>
 </template>
 
@@ -29,12 +31,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.task {
-  height: 2em;
-  min-width: 100px;
-  display: inline-block;
-  padding: 5px;
-  margin: 2px;
-  background-color: #bdd5ea;
+.task-wrapper {
+  width: 100%;
+  .task {
+    height: 2em;
+    min-width: 100px;
+    display: inline-block;
+    padding: 5px;
+    margin: 2px;
+    background-color: #bdd5ea;
+  }
 }
 </style>

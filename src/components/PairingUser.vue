@@ -1,6 +1,8 @@
 <template>
-  <div class="person" draggable="true" @dragstart="startDrag($event)">
-    {{ user.name }}
+  <div class="user-wrapper">
+    <div class="person" draggable="true" @dragstart="startDrag($event)">
+      {{ user.name }}
+    </div>
   </div>
 </template>
 
@@ -24,12 +26,15 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.person {
-  height: 2em;
-  min-width: 100px;
-  display: inline-block;
-  padding: 5px;
-  margin: 2px;
-  background-color: #bdd5ea;
+.user-wrapper {
+  width: 100%;
+  .person {
+    height: 2em;
+    min-width: 100px;
+    display: inline-block;
+    padding: 5px;
+    margin: 2px;
+    background-color: #bdd5ea;
+  }
 }
 </style>
