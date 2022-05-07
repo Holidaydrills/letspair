@@ -35,11 +35,18 @@ export const options: StoreOptions<State> = {
       console.log(`Add new lane: ${JSON.stringify(lane)}`);
     },
     addTaskToLane(state: State, task: Task) {
-      if (state.lanes[0].tasks) {
-        state.lanes[0].tasks.push(task);
-      } else {
-        state.lanes[0].tasks = [task];
+      const lane = state.lanes.find((lane) => lane.id === task.laneId);
+      if (!lane) {
+        console.error(`Lane with id ${task.laneId} does not exist!`);
+        return;
       }
+      console.log(`Found lane ${JSON.stringify(lane)}`);
+      if (lane.tasks) {
+        lane.tasks.push(task);
+      } else {
+        lane.tasks = [task];
+      }
+      console.log(`pushed tasks: ${JSON.stringify(lane)}`);
       const taskId = task.id;
       const filtered = state.openTasks.filter((task) => task.id !== taskId);
       state.openTasks = filtered;

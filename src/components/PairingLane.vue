@@ -6,7 +6,6 @@
     @dragenter.prevent
   >
     <div class="lane-section">
-      <p>{{ lane.id }}</p>
       <pairing-user
         v-for="user in lane.users"
         v-bind:user="user"
@@ -14,7 +13,6 @@
       />
     </div>
     <div class="lane-section">
-      <p>{{ lane.id }}</p>
       <pairing-task
         v-for="task in lane.tasks"
         v-bind:task="task"
@@ -30,7 +28,6 @@ import { defineComponent } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
-import { Task } from "@/models/Task";
 
 export default defineComponent({
   components: { PairingUser, PairingTask },
@@ -40,8 +37,12 @@ export default defineComponent({
     const onDrop = (e: any, item: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
-        store.dispatch("addTaskToLane", JSON.parse(taskAsJson));
-        console.log(`Dropped task ${taskAsJson}`);
+        const droppedTask = JSON.parse(taskAsJson);
+        droppedTask.laneId = props.lane.id;
+        store.dispatch("addTaskToLane", droppedTask);
+        console.log(
+          `Dropped task ${JSON.stringify(droppedTask)} to lane ${props.lane.id}`
+        );
       } else {
         const userAsJson = e.dataTransfer.getData("user");
         store.dispatch("addUserToLane", JSON.parse(userAsJson));

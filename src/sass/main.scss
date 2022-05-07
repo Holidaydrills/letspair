@@ -44,6 +44,7 @@ $margin-medium: 10px;
 }
 
 .lane {
+  min-height: 100px;
   background-color: $bg-color-default;
   margin-bottom: $margin-medium;
   padding: $margin-xsmall;
