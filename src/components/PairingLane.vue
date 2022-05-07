@@ -1,24 +1,24 @@
 <template>
   <div
-    class="lane-persons"
+    class="lane"
     @drop="onDrop($event, 1)"
     @dragover.prevent
     @dragenter.prevent
   >
-    <div>
-      <p>{{ lane.id }}</p>
-      <pairing-task
-        v-for="task in lane.tasks"
-        v-bind:task="task"
-        :key="task.id"
-      />
-    </div>
-    <div>
+    <div class="lane-section">
       <p>{{ lane.id }}</p>
       <pairing-user
         v-for="user in lane.users"
         v-bind:user="user"
         :key="user.id"
+      />
+    </div>
+    <div class="lane-section">
+      <p>{{ lane.id }}</p>
+      <pairing-task
+        v-for="task in lane.tasks"
+        v-bind:task="task"
+        :key="task.id"
       />
     </div>
   </div>
@@ -67,18 +67,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.lane {
-  height: 7em;
-  padding: 5px;
-  border-bottom-style: solid;
-  border-width: 1px;
-}
-
-.lane-persons {
-  background-color: #eee;
-  margin-bottom: 10px;
-  padding: 10px;
-}
-</style>

@@ -1,39 +1,71 @@
-$bg-color-header:red;
-$bg-color-left-sidebar:blue;
-$bg-color-content-area:black;
-$bg-color-right-sidebar:orange;
-$bg-color-footer:yellow;
+$bg-color-header: red;
+$bg-color-left-sidebar: blue;
+$bg-color-content-area: black;
+$bg-color-right-sidebar: orange;
+$bg-color-footer: yellow;
+$bg-color-default: #eee;
+$bg-color-user: #72ddf7;
+$bg-color-task: #aed9e0;
+$margin-xsmall: 2px;
+$margin-small: 5px;
+$margin-medium: 10px;
 
 .container {
-    display: grid;
-    width: 100vw;
-    height: 100vh;
-    grid-template-columns: 15% auto 15%;
-    grid-template-rows: 15% auto 15%;
-};
-
-.header {
-    grid-area: 1 / 1 / 2 / 4;
-    background-color: $bg-color-header;
-};
-
-.left-sidebar {
-    grid-area: 2 / 1 / 3 / 2;
-    background-color: $bg-color-left-sidebar
-};
-
-.content-area {
-    grid-area: 2 / 2 / 3 / 3;
-    background-color: $bg-color-content-area
-};
-
-.right-sidebar {
-    grid-area: 2 / 3 / 3 / 4;
-    background-color: $bg-color-right-sidebar
-};
-
-.footer {
-    grid-area: 3 / 1 / 4 / 4;
-    background-color: $bg-color-footer;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: 15% auto 15%;
+  grid-template-rows: 15% auto 15%;
 }
 
+.header {
+  grid-area: 1 / 1 / 2 / 4;
+  background-color: $bg-color-header;
+}
+
+.left-sidebar {
+  grid-area: 2 / 1 / 3 / 2;
+  background-color: $bg-color-left-sidebar;
+}
+
+.content-area {
+  grid-area: 2 / 2 / 3 / 3;
+  background-color: $bg-color-content-area;
+}
+
+.right-sidebar {
+  grid-area: 2 / 3 / 3 / 4;
+  background-color: $bg-color-right-sidebar;
+}
+
+.footer {
+  grid-area: 3 / 1 / 4 / 4;
+  background-color: $bg-color-footer;
+}
+
+.lane {
+  background-color: $bg-color-default;
+  margin-bottom: $margin-medium;
+  padding: $margin-medium;
+}
+
+.lane-section {
+  margin-bottom: $margin-medium;
+  padding: $margin-medium;
+}
+
+.user {
+  min-width: 100px;
+  display: inline-block;
+  padding: $margin-small;
+  margin: $margin-small;
+  background-color: $bg-color-user;
+}
+
+.task {
+  min-width: 100px;
+  display: inline-block;
+  padding: $margin-small;
+  margin: $margin-small;
+  background-color: $bg-color-task;
+}
