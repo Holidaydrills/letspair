@@ -46,19 +46,18 @@ $margin-medium: 10px;
 .lane {
   background-color: $bg-color-default;
   margin-bottom: $margin-medium;
-  padding: $margin-medium;
+  padding: $margin-xsmall;
 }
 
 .lane-section {
-  margin-bottom: $margin-medium;
-  padding: $margin-medium;
+  padding: $margin-xsmall;
 }
 
 .user {
   min-width: 100px;
   display: inline-block;
   padding: $margin-small;
-  margin: $margin-small;
+  margin: $margin-xsmall $margin-xsmall 0px;
   background-color: $bg-color-user;
 }
 
@@ -66,6 +65,6 @@ $margin-medium: 10px;
   min-width: 100px;
   display: inline-block;
   padding: $margin-small;
-  margin: $margin-small;
+  margin: $margin-xsmall $margin-xsmall 0px;
   background-color: $bg-color-task;
 }
