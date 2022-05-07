@@ -7,28 +7,26 @@ import { StoreOptions } from "vuex";
 import { Lane } from "@/models/Lane";
 
 export type State = {
-  availableUsers: Array<User>;
-  unavailableUsers: Array<User>;
-  openTasks: Array<Task>;
+  users: Array<User>;
+  tasks: Array<Task>;
   lanes: Array<Lane>;
 };
 
 export const options: StoreOptions<State> = {
   state(): State {
     return {
-      availableUsers: [],
-      unavailableUsers: [],
-      openTasks: [],
+      users: [],
+      tasks: [],
       lanes: [],
     };
   },
   mutations: {
     getAllUsers(state: State, users: Array<User>) {
-      state.availableUsers = users;
+      state.users = users;
     },
     getAllTasks(state: State, tasks: Array<Task>) {
-      state.openTasks = tasks;
-      console.log(`state.tasks = ${JSON.stringify(state.openTasks)}`);
+      state.tasks = tasks;
+      console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
     },
     addNewLane(state: State, lane: Lane) {
       state.lanes.push(lane);
@@ -47,11 +45,6 @@ export const options: StoreOptions<State> = {
         lane.tasks = [task];
       }
       console.log(`pushed task: ${JSON.stringify(lane)}`);
-      const droppedTaskId = task.id;
-      const filtered = state.openTasks.filter(
-        (task) => task.id !== droppedTaskId
-      );
-      state.openTasks = filtered;
     },
     addUserToLane(state: State, user: User) {
       const lane = state.lanes.find((lane) => lane.id === user.laneId);
@@ -66,11 +59,6 @@ export const options: StoreOptions<State> = {
         lane.users = [user];
       }
       console.log(`pushed user: ${JSON.stringify(lane)}`);
-      const droppedUserId = user.id;
-      const filtered = state.availableUsers.filter(
-        (user) => user.id !== droppedUserId
-      );
-      state.availableUsers = filtered;
     },
   },
   actions: {

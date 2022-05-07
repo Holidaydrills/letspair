@@ -30,17 +30,10 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      tasks: computed(() => store.state.openTasks),
-      users: computed(() => store.state.availableUsers),
+      tasks: computed(() => store.state.tasks.filter((task) => !task.laneId)),
+      users: computed(() => store.state.users.filter((user) => !user.laneId)),
     };
   },
-  // methods: {
-  //   onDrop(evt: any, person: any) {
-  //     // const itemID = evt.dataTransfer.getData("itemID");
-  //     // this.lane.people.push("New Person");
-  //     alert(`Dropped this`);
-  //   },
-  // },
 });
 </script>
 
