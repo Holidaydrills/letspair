@@ -39,8 +39,6 @@ export const options: StoreOptions<State> = {
         return;
       }
       console.log(`Found lane ${JSON.stringify(lane)}`);
-
-      //TODO: Refactor: Move state update of task to component? Meaning use the state directly in the component
       const taskFromState = state.tasks.find(
         (taskFromState) => taskFromState.id === task.id
       );
@@ -58,7 +56,6 @@ export const options: StoreOptions<State> = {
         return;
       }
       console.log(`Found lane ${JSON.stringify(lane)}`);
-      //TODO: Refactor: Move state update of task to component? Meaning use the state directly in the component
       const userFromState = state.users.find(
         (userFromState) => userFromState.id === user.id
       );
@@ -67,6 +64,22 @@ export const options: StoreOptions<State> = {
         userFromState.laneId = user.laneId;
       }
       console.log(`pushed user: ${JSON.stringify(lane)}`);
+    },
+    removeTaskFromLane(state: State, task: Task) {
+      const taskFromState = state.tasks.find(
+        (taskFromState) => taskFromState.id === task.id
+      );
+      if (taskFromState) {
+        taskFromState.laneId = undefined;
+      }
+    },
+    removeUserFromLane(state: State, user: User) {
+      const userFromState = state.users.find(
+        (userFromState) => userFromState.id === user.id
+      );
+      if (userFromState) {
+        userFromState.laneId = undefined;
+      }
     },
   },
   actions: {
@@ -84,6 +97,12 @@ export const options: StoreOptions<State> = {
     },
     async addUserToLane({ commit }, user: User) {
       commit("addUserToLane", user);
+    },
+    async removeTaskFromLane({ commit }, task: Task) {
+      commit("removeTaskFromLane", task);
+    },
+    async removeUserFromLane({ commit }, user: User) {
+      commit("removeUserFromLane", user);
     },
   },
   getters: {

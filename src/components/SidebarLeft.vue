@@ -38,14 +38,12 @@ export default defineComponent({
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
         const droppedTask = JSON.parse(taskAsJson);
-        // droppedTask.laneId = props.lane.id;
-        // store.dispatch("addTaskToLane", droppedTask);
+        store.dispatch("removeTaskFromLane", droppedTask);
         console.log(`Dropped task ${JSON.stringify(droppedTask)}`);
       } else {
         const userAsJson = e.dataTransfer.getData("user");
         const droppedUser = JSON.parse(userAsJson);
-        // droppedUser.laneId = props.lane.id;
-        // store.dispatch("addUserToLane", droppedUser);
+        store.dispatch("removeUserFromLane", droppedUser);
         console.log(`Dropped user ${JSON.stringify(droppedUser)}`);
       }
     };
