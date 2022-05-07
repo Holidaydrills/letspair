@@ -3,7 +3,7 @@
     <div v-for="lane in lanes" :key="lane.id">
       <pairing-lane :lane="lane" />
     </div>
-    <button @click="addPairingLane">New Lane</button>
+    <button @click="addNewLane">New Lane</button>
   </div>
 </template>
 
@@ -17,12 +17,12 @@ export default defineComponent({
   components: { PairingLane },
   setup() {
     const store = useStore();
-    const addPairingLane = () => {
+    const addNewLane = () => {
       store.dispatch("addNewLane");
     };
     return {
       lanes: computed(() => store.state.lanes),
-      addPairingLane,
+      addNewLane,
     };
   },
 });
