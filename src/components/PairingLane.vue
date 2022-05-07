@@ -45,8 +45,12 @@ export default defineComponent({
         );
       } else {
         const userAsJson = e.dataTransfer.getData("user");
-        store.dispatch("addUserToLane", JSON.parse(userAsJson));
-        console.log(`Dropped user description ${userAsJson}`);
+        const droppedUser = JSON.parse(userAsJson);
+        droppedUser.laneId = props.lane.id;
+        store.dispatch("addUserToLane", droppedUser);
+        console.log(
+          `Dropped user ${JSON.stringify(droppedUser)} to lane ${props.lane.id}`
+        );
       }
     };
     return {

@@ -46,20 +46,29 @@ export const options: StoreOptions<State> = {
       } else {
         lane.tasks = [task];
       }
-      console.log(`pushed tasks: ${JSON.stringify(lane)}`);
-      const taskId = task.id;
-      const filtered = state.openTasks.filter((task) => task.id !== taskId);
+      console.log(`pushed task: ${JSON.stringify(lane)}`);
+      const droppedTaskId = task.id;
+      const filtered = state.openTasks.filter(
+        (task) => task.id !== droppedTaskId
+      );
       state.openTasks = filtered;
     },
     addUserToLane(state: State, user: User) {
-      if (state.lanes[0].users) {
-        state.lanes[0].users.push(user);
-      } else {
-        state.lanes[0].users = [user];
+      const lane = state.lanes.find((lane) => lane.id === user.laneId);
+      if (!lane) {
+        console.error(`Lane with id ${user.laneId} does not exist!`);
+        return;
       }
-      const userId = user.id;
+      console.log(`Found lane ${JSON.stringify(lane)}`);
+      if (lane.users) {
+        lane.users.push(user);
+      } else {
+        lane.users = [user];
+      }
+      console.log(`pushed user: ${JSON.stringify(lane)}`);
+      const droppedUserId = user.id;
       const filtered = state.availableUsers.filter(
-        (user) => user.id !== userId
+        (user) => user.id !== droppedUserId
       );
       state.availableUsers = filtered;
     },
