@@ -96,4 +96,12 @@ export const options: StoreOptions<State> = {
       commit("addUserToLane", user);
     },
   },
+  getters: {
+    openTasks(state) {
+      return state.tasks.filter((task) => !task.laneId);
+    },
+    availableUsers(state) {
+      return state.users.filter((user) => !user.laneId);
+    },
+  },
 };

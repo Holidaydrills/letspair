@@ -30,8 +30,8 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      tasks: computed(() => store.state.tasks.filter((task) => !task.laneId)),
-      users: computed(() => store.state.users.filter((user) => !user.laneId)),
+      tasks: computed(() => store.getters.openTasks),
+      users: computed(() => store.getters.availableUsers),
     };
   },
 });
