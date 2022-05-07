@@ -39,11 +39,6 @@ export const options: StoreOptions<State> = {
         return;
       }
       console.log(`Found lane ${JSON.stringify(lane)}`);
-      if (lane.tasks) {
-        lane.tasks.push(task);
-      } else {
-        lane.tasks = [task];
-      }
 
       //TODO: Refactor: Move state update of task to component? Meaning use the state directly in the component
       const taskFromState = state.tasks.find(
@@ -63,11 +58,6 @@ export const options: StoreOptions<State> = {
         return;
       }
       console.log(`Found lane ${JSON.stringify(lane)}`);
-      if (lane.users) {
-        lane.users.push(user);
-      } else {
-        lane.users = [user];
-      }
       //TODO: Refactor: Move state update of task to component? Meaning use the state directly in the component
       const userFromState = state.users.find(
         (userFromState) => userFromState.id === user.id
@@ -102,6 +92,13 @@ export const options: StoreOptions<State> = {
     },
     availableUsers(state) {
       return state.users.filter((user) => !user.laneId);
+    },
+    tasksForLaneId: (state) => (laneId: string) => {
+      return state.tasks.filter((task) => task.laneId === laneId);
+    },
+
+    usersForLaneId: (state) => (laneId: string) => {
+      return state.users.filter((user) => user.laneId === laneId);
     },
   },
 };

@@ -1,23 +1,10 @@
 <template>
-  <div
-    class="lane"
-    @drop="onDrop($event, 1)"
-    @dragover.prevent
-    @dragenter.prevent
-  >
+  <div class="lane" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
     <div class="lane-section">
-      <pairing-user
-        v-for="user in lane.users"
-        v-bind:user="user"
-        :key="user.id"
-      />
+      <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
     </div>
     <div class="lane-section">
-      <pairing-task
-        v-for="task in lane.tasks"
-        v-bind:task="task"
-        :key="task.id"
-      />
+      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
     </div>
   </div>
   <button @click="$emit('removeLane', laneId)">Remove lane</button>
@@ -28,13 +15,14 @@ import { defineComponent } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
+import { computed } from "vue";
 
 export default defineComponent({
   components: { PairingUser, PairingTask },
   props: ["lane"],
   setup(props) {
     const store = useStore();
-    const onDrop = (e: any, item: any) => {
+    const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
         const droppedTask = JSON.parse(taskAsJson);
@@ -54,6 +42,8 @@ export default defineComponent({
       }
     };
     return {
+      tasks: computed(() => store.getters.tasksForLaneId(props.lane.id)),
+      users: computed(() => store.getters.usersForLaneId(props.lane.id)),
       onDrop,
     };
   },
