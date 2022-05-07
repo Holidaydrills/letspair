@@ -1,6 +1,6 @@
 <template>
   <div class="user-wrapper">
-    <div class="person" draggable="true" @dragstart="startDrag($event)">
+    <div class="person" draggable="true" @dragstart="startDrag($event, user)">
       {{ user.name }}
     </div>
   </div>
@@ -11,16 +11,21 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   emits: ["removeLane"],
-  props: ["user", "lane"],
-  methods: {
-    startDrag(evt: any, item: any) {
-      evt.dataTransfer.dropEffect = "move";
-      evt.dataTransfer.effectAllowed = "move";
-      evt.dataTransfer.setData("itemID", "New Person");
-    },
-    onDrop(evt: any, person: any) {
-      alert(`Dropped ${this.lane.people}`);
-    },
+  props: ["user"],
+  setup() {
+    const startDrag = (e: any, user: any) => {
+      console.log(
+        JSON.stringify(
+          `Start drag data: Event: ${JSON.stringify(e)}; item: ${JSON.stringify(
+            user
+          )}`
+        )
+      );
+      e.dataTransfer.setData("user", JSON.stringify(user));
+    };
+    return {
+      startDrag,
+    };
   },
 });
 </script>

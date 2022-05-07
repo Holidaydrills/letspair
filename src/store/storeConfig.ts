@@ -44,6 +44,18 @@ export const options: StoreOptions<State> = {
       const filtered = state.openTasks.filter((task) => task.id !== taskId);
       state.openTasks = filtered;
     },
+    addUserToLane(state: State, user: User) {
+      if (state.lanes[0].users) {
+        state.lanes[0].users.push(user);
+      } else {
+        state.lanes[0].users = [user];
+      }
+      const userId = user.id;
+      const filtered = state.availableUsers.filter(
+        (user) => user.id !== userId
+      );
+      state.availableUsers = filtered;
+    },
   },
   actions: {
     async getAllUsers({ commit }) {
@@ -57,6 +69,9 @@ export const options: StoreOptions<State> = {
     },
     async addTaskToLane({ commit }, task: Task) {
       commit("addTaskToLane", task);
+    },
+    async addUserToLane({ commit }, user: User) {
+      commit("addUserToLane", user);
     },
   },
 };

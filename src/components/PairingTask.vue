@@ -13,15 +13,15 @@ export default defineComponent({
   emits: ["removeLane"],
   props: ["task"],
   setup() {
-    const startDrag = (evt: any, task: any) => {
+    const startDrag = (e: any, task: any) => {
       console.log(
         JSON.stringify(
-          `Start drag data: Event: ${JSON.stringify(
-            evt
-          )}; item: ${JSON.stringify(task)}`
+          `Start drag data: Event: ${JSON.stringify(e)}; item: ${JSON.stringify(
+            task
+          )}`
         )
       );
-      evt.dataTransfer.setData("task", JSON.stringify(task));
+      e.dataTransfer.setData("task", JSON.stringify(task));
     };
     return {
       startDrag,

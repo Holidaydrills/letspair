@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs } from "vue";
+import { defineComponent } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
@@ -37,11 +37,15 @@ export default defineComponent({
   props: ["lane"],
   setup(props) {
     const store = useStore();
-    const onDrop = (evt: any, item: any) => {
-      const taskAsJson = evt.dataTransfer.getData("task");
+    const onDrop = (e: any, item: any) => {
+      const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
         store.dispatch("addTaskToLane", JSON.parse(taskAsJson));
-        console.log(`Dropped item description ${taskAsJson}`);
+        console.log(`Dropped task ${taskAsJson}`);
+      } else {
+        const userAsJson = e.dataTransfer.getData("user");
+        store.dispatch("addUserToLane", JSON.parse(userAsJson));
+        console.log(`Dropped user description ${userAsJson}`);
       }
     };
     return {
@@ -55,10 +59,10 @@ export default defineComponent({
     };
   },
   methods: {
-    startDrag(evt: any, item: any) {
-      evt.dataTransfer.dropEffect = "move";
-      evt.dataTransfer.effectAllowed = "move";
-      evt.dataTransfer.setData("itemID", "New Person");
+    startDrag(e: any, item: any) {
+      e.dataTransfer.dropEffect = "move";
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("itemID", "New Person");
     },
   },
 });
