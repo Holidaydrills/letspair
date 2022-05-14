@@ -30,7 +30,7 @@ export default defineComponent({
 
 <style lang="scss">
 .task-area {
-  background-color: purple;
+  background-color: #cccccc;
   width: 100%;
   height: 100%;
 }

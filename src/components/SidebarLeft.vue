@@ -3,8 +3,8 @@
     Tasks
     <div
       class="person-area"
-      @drop="onDrop($event)"
-      @dragover.prevent
+      @drop="onDrop"
+      @dragover="onDragOverTaskArea"
       @dragenter.prevent
     >
       <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
@@ -15,7 +15,7 @@
     <div
       class="person-area"
       @drop="onDrop($event)"
-      @dragover.prevent
+      @dragover="onDragOverPersonArea"
       @dragenter.prevent
     >
       <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
@@ -34,6 +34,16 @@ export default defineComponent({
   components: { PairingTask, PairingUser },
   setup() {
     const store = useStore();
+    const onDragOverPersonArea = (e: any) => {
+      if (e.dataTransfer.types[0] === "user") {
+        e.preventDefault();
+      }
+    };
+    const onDragOverTaskArea = (e: any) => {
+      if (e.dataTransfer.types[0] === "task") {
+        e.preventDefault();
+      }
+    };
     const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
@@ -50,6 +60,8 @@ export default defineComponent({
     return {
       tasks: computed(() => store.getters.openTasks),
       users: computed(() => store.getters.availableUsers),
+      onDragOverPersonArea,
+      onDragOverTaskArea,
       onDrop,
     };
   },
