@@ -1,11 +1,13 @@
 <template>
   <div class="lane" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
     <div class="lane-section">
-      <div v-for="user in users" :user="user" :key="user.id">
-        <div class="list-drop-area"></div>
-        <pairing-user :user="user" />
-        <div class="list-drop-area"></div>
-      </div>
+      <TransitionGroup name="list">
+        <div v-for="user in users" :user="user" :key="user.id">
+          <div class="list-drop-area"></div>
+          <pairing-user :user="user" />
+          <div class="list-drop-area"></div>
+        </div>
+      </TransitionGroup>
     </div>
     <div class="lane-section">
       <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
