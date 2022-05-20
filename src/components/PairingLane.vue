@@ -3,9 +3,7 @@
     <div class="lane-section">
       <TransitionGroup name="list">
         <div v-for="user in users" :user="user" :key="user.id">
-          <div class="list-drop-area"></div>
           <pairing-user :user="user" />
-          <div class="list-drop-area"></div>
         </div>
       </TransitionGroup>
     </div>

@@ -6,7 +6,6 @@ $bg-color-footer: #eeeeee;
 $bg-color-default: #eee;
 $bg-color-user: #72ddf7;
 $bg-color-task: #aed9e0;
-$bg-color-drop-area: red;
 $margin-xsmall: 2px;
 $margin-small: 5px;
 $margin-medium: 10px;
@@ -71,9 +70,8 @@ $margin-medium: 10px;
   background-color: $bg-color-task;
 }
 
-.list-drop-area {
-  background-color: $bg-color-drop-area;
-  height: 5px;
+.dragged-item {
+  opacity: 0.5;
 }
 
 //List transitions

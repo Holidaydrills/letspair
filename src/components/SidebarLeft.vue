@@ -7,7 +7,12 @@
       @dragover="onDragOverTaskArea"
       @dragenter.prevent
     >
-      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
+      <pairing-task
+        v-for="task in tasks"
+        v-bind:task="task"
+        :key="task.id"
+        class=""
+      />
     </div>
   </div>
   <div>
