@@ -11,7 +11,7 @@
         v-for="task in tasks"
         v-bind:task="task"
         :key="task.id"
-        class=""
+        @startDragTask="onStartDragTask"
       />
     </div>
   </div>
@@ -62,12 +62,16 @@ export default defineComponent({
         console.log(`Dropped user ${JSON.stringify(droppedUser)}`);
       }
     };
+    const onStartDragTask = (e: any) => {
+      console.log("Start drag task");
+    };
     return {
       tasks: computed(() => store.getters.openTasks),
       users: computed(() => store.getters.availableUsers),
       onDragOverPersonArea,
       onDragOverTaskArea,
       onDrop,
+      onStartDragTask,
     };
   },
 });

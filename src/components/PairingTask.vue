@@ -12,27 +12,18 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref, defineProps, defineEmits } from "vue";
 
-export default defineComponent({
-  emits: ["removeLane"],
-  props: ["task"],
-  setup() {
-    const isDragged = ref(false);
-    const startDrag = (e: any, task: any) => {
-      isDragged.value = true;
-      console.log(`isDragged: ${isDragged.value}`);
-      e.dataTransfer.setData("task", JSON.stringify(task));
-    };
-    const dragEnd = () => {
-      isDragged.value = false;
-    };
-    return {
-      startDrag,
-      dragEnd,
-      isDragged,
-    };
-  },
-});
+const emit = defineEmits(["removeLane", "startDragTask"]);
+const props = defineProps(["task"]);
+const isDragged = ref(false);
+function startDrag(e: any, task: any) {
+  isDragged.value = true;
+  e.dataTransfer.setData("task", JSON.stringify(task));
+  emit("startDragTask");
+}
+function dragEnd() {
+  isDragged.value = false;
+}
 </script>

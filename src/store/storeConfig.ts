@@ -26,41 +26,31 @@ export const options: StoreOptions<State> = {
     },
     getAllTasks(state: State, tasks: Array<Task>) {
       state.tasks = tasks;
-      console.log(`state.tasks = ${JSON.stringify(state.tasks)}`);
     },
     addNewLane(state: State, lane: Lane) {
       state.lanes.push(lane);
-      console.log(`Add new lane: ${JSON.stringify(lane)}`);
     },
     addTaskToLane(state: State, task: Task) {
       const lane = state.lanes.find((lane) => lane.id === task.laneId);
       if (!lane) {
-        console.error(`Lane with id ${task.laneId} does not exist!`);
         return;
       }
-      console.log(`Found lane ${JSON.stringify(lane)}`);
       const taskFromState = state.tasks.find(
         (taskFromState) => taskFromState.id === task.id
       );
       if (taskFromState) {
-        console.log(`Found task from state: ${JSON.stringify(taskFromState)}`);
         taskFromState.laneId = task.laneId;
-        console.log(`Add laneId to task: ${JSON.stringify(taskFromState)}`);
       }
-      console.log(`pushed task: ${JSON.stringify(lane)}`);
     },
     addUserToLane(state: State, user: User) {
       const lane = state.lanes.find((lane) => lane.id === user.laneId);
       if (!lane) {
-        console.error(`Lane with id ${user.laneId} does not exist!`);
         return;
       }
-      console.log(`Found lane ${JSON.stringify(lane)}`);
       const userFromState = state.users.find(
         (userFromState) => userFromState.id === user.id
       );
       if (userFromState) {
-        console.log(`Found user from state: ${JSON.stringify(userFromState)}`);
         userFromState.laneId = user.laneId;
       }
       console.log(`pushed user: ${JSON.stringify(lane)}`);
