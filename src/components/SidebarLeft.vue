@@ -2,6 +2,7 @@
   <div>
     Tasks
     <div
+      id="taskArea"
       class="person-area"
       @drop="onDrop"
       @dragover="onDragOverTaskArea"
@@ -18,6 +19,7 @@
   <div>
     Users
     <div
+      id="personArea"
       class="person-area"
       @drop="onDrop($event)"
       @dragover="onDragOverPersonArea"
@@ -40,12 +42,29 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const onDragOverPersonArea = (e: any) => {
-      if (e.dataTransfer.types[0] === "user") {
-        e.preventDefault();
-      }
+      preventDefault(e);
+    };
+
+    const onDragEnterPersonArea = (e: any) => {
+      preventDefault(e);
     };
     const onDragOverTaskArea = (e: any) => {
-      if (e.dataTransfer.types[0] === "task") {
+      preventDefault(e);
+    };
+    const onDragEnterTaskArea = (e: any) => {
+      preventDefault(e);
+    };
+
+    const preventDefault = (e: any) => {
+      const elementId = e.target.id;
+      const dataTransferType = e.dataTransfer.types[0];
+      console.log(
+        `elementId: ${elementId} & dataTransferType: ${dataTransferType}`
+      );
+      if (
+        (elementId === "personArea" && dataTransferType === "user") ||
+        (elementId === "taskArea" && dataTransferType === "task")
+      ) {
         e.preventDefault();
       }
     };
@@ -69,7 +88,9 @@ export default defineComponent({
       tasks: computed(() => store.getters.openTasks),
       users: computed(() => store.getters.availableUsers),
       onDragOverPersonArea,
+      onDragEnterPersonArea,
       onDragOverTaskArea,
+      onDragEnterTaskArea,
       onDrop,
       onStartDragTask,
     };
