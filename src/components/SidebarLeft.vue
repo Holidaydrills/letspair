@@ -56,14 +56,18 @@ export default defineComponent({
     };
 
     const preventDefault = (e: any) => {
-      const elementId = e.target.id;
+      const element = e.target;
       const dataTransferType = e.dataTransfer.types[0];
       console.log(
-        `elementId: ${elementId} & dataTransferType: ${dataTransferType}`
+        `elementId: ${element.id} & closestPerson: ${element.closest(
+          "#personArea"
+        )} & dataTransferType: ${dataTransferType}`
       );
       if (
-        (elementId === "personArea" && dataTransferType === "user") ||
-        (elementId === "taskArea" && dataTransferType === "task")
+        ((element.id === "personArea" || element.closest("#personArea")) &&
+          dataTransferType === "user") ||
+        ((element.id === "taskArea" || element.closest("#taskArea")) &&
+          dataTransferType === "task")
       ) {
         e.preventDefault();
       }
