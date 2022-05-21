@@ -5,6 +5,7 @@ import { getAllTasks } from "@/services/TaskService";
 import { addNewLane } from "@/services/PairingBoardService";
 import { StoreOptions } from "vuex";
 import { Lane } from "@/models/Lane";
+import { v4 as uuidv4 } from "uuid";
 
 export type State = {
   users: Array<User>;
@@ -29,6 +30,14 @@ export const options: StoreOptions<State> = {
     },
     addNewLane(state: State, lane: Lane) {
       state.lanes.push(lane);
+    },
+    removeTaskFromSidebar(state: State, task: Task) {
+      const taskFromState = state.tasks.find(
+        (taskFromState) => taskFromState.id === task.id
+      );
+      if (taskFromState) {
+        taskFromState.laneId = uuidv4();
+      }
     },
     addTaskToLane(state: State, task: Task) {
       const lane = state.lanes.find((lane) => lane.id === task.laneId);
@@ -78,6 +87,9 @@ export const options: StoreOptions<State> = {
     },
     async getAllTasks({ commit }) {
       commit("getAllTasks", await getAllTasks());
+    },
+    async removeTaskFromSidebar({ commit }, task: Task) {
+      commit("removeTaskFromSidebar", task);
     },
     async addNewLane({ commit }) {
       commit("addNewLane", await addNewLane());

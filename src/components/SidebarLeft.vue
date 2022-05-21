@@ -36,6 +36,7 @@ import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
 import { computed } from "vue";
+import { Task } from "@/models/Task";
 
 export default defineComponent({
   components: { PairingTask, PairingUser },
@@ -85,8 +86,11 @@ export default defineComponent({
         console.log(`Dropped user ${JSON.stringify(droppedUser)}`);
       }
     };
-    const onStartDragTask = (e: any) => {
+    const onStartDragTask = (task: Task) => {
       console.log("Start drag task");
+      //const taskAsJson = e.dataTransfer.getData("task");
+      console.log(`TaskAsJSON: ${JSON.stringify(task)}`);
+      store.dispatch("removeTaskFromSidebar", task);
     };
     return {
       tasks: computed(() => store.getters.openTasks),

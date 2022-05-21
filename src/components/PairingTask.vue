@@ -21,7 +21,7 @@ const isDragged = ref(false);
 function startDrag(e: any, task: any) {
   isDragged.value = true;
   e.dataTransfer.setData("task", JSON.stringify(task));
-  emit("startDragTask");
+  emit("startDragTask", task);
 }
 function dragEnd() {
   isDragged.value = false;
