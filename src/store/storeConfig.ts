@@ -12,7 +12,7 @@ export type State = {
   users: Array<User>;
   tasks: Array<Task>;
   lanes: Array<Lane>;
-  currentlyDraggedItem: CurrentlyDraggedItem;
+  currentlyDraggedItem: CurrentlyDraggedItem | undefined;
 };
 
 export const options: StoreOptions<State> = {

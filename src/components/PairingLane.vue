@@ -34,7 +34,11 @@ export default defineComponent({
     const onDragOver = (e: any) => {
       e.preventDefault();
       console.log(
-        `PairingLane taskSourceDragArea: ${e.dataTransfer.getData("task")}`
+        `PairingLane taskSourceDragArea: ${e.view.document
+          .querySelector(".dragged-item")
+          .parentNode.getAttribute("data-source-drag-area")} & taskId: ${
+          e.view.document.querySelector(".dragged-item").parentNode.id
+        }`
       );
     };
     const onDrop = (e: any) => {
