@@ -6,11 +6,13 @@ import { addNewLane } from "@/services/PairingBoardService";
 import { StoreOptions } from "vuex";
 import { Lane } from "@/models/Lane";
 import { v4 as uuidv4 } from "uuid";
+import { CurrentlyDraggedItem } from "../models/CurrentlyDraggedItem";
 
 export type State = {
   users: Array<User>;
   tasks: Array<Task>;
   lanes: Array<Lane>;
+  currentlyDraggedItem: CurrentlyDraggedItem;
 };
 
 export const options: StoreOptions<State> = {
@@ -19,6 +21,7 @@ export const options: StoreOptions<State> = {
       users: [],
       tasks: [],
       lanes: [],
+      currentlyDraggedItem: undefined,
     };
   },
   mutations: {
@@ -80,6 +83,12 @@ export const options: StoreOptions<State> = {
         userFromState.laneId = undefined;
       }
     },
+    setCurrentlyDraggetItem(
+      state: State,
+      currentlyDraggedItem: CurrentlyDraggedItem
+    ) {
+      state.currentlyDraggedItem = currentlyDraggedItem;
+    },
   },
   actions: {
     async getAllUsers({ commit }) {
@@ -105,6 +114,12 @@ export const options: StoreOptions<State> = {
     },
     async removeUserFromLane({ commit }, user: User) {
       commit("removeUserFromLane", user);
+    },
+    setCurrentlyDraggetItem(
+      { commit },
+      currentlyDraggedItem: CurrentlyDraggedItem
+    ) {
+      commit("setCurrentlyDraggedItem", currentlyDraggedItem);
     },
   },
   getters: {

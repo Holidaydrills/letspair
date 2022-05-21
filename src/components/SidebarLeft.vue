@@ -10,7 +10,8 @@
     >
       <pairing-task
         v-for="task in tasks"
-        v-bind:task="task"
+        :task="task"
+        sourceDragArea="sideBar"
         :key="task.id"
         @startDragTask="onStartDragTask"
       />
@@ -68,7 +69,7 @@ export default defineComponent({
         ((element.id === "personArea" || element.closest("#personArea")) &&
           dataTransferType === "user") ||
         ((element.id === "taskArea" || element.closest("#taskArea")) &&
-          dataTransferType === "task")
+          dataTransferType.includes("task"))
       ) {
         e.preventDefault();
       }
@@ -88,9 +89,7 @@ export default defineComponent({
     };
     const onStartDragTask = (task: Task) => {
       console.log("Start drag task");
-      //const taskAsJson = e.dataTransfer.getData("task");
       console.log(`TaskAsJSON: ${JSON.stringify(task)}`);
-      store.dispatch("removeTaskFromSidebar", task);
     };
     return {
       tasks: computed(() => store.getters.openTasks),

@@ -1,5 +1,10 @@
 <template>
-  <div class="lane" @drop="onDrop($event)" @dragover.prevent @dragenter.prevent>
+  <div
+    class="lane"
+    @drop="onDrop($event)"
+    @dragover="onDragOver"
+    @dragenter.prevent
+  >
     <div class="lane-section">
       <TransitionGroup name="list">
         <div v-for="user in users" :user="user" :key="user.id">
@@ -8,7 +13,7 @@
       </TransitionGroup>
     </div>
     <div class="lane-section">
-      <pairing-task v-for="task in tasks" v-bind:task="task" :key="task.id" />
+      <pairing-task v-for="task in tasks" :task="task" :key="task.id" />
     </div>
   </div>
   <button @click="$emit('removeLane', laneId)">Remove lane</button>
@@ -26,9 +31,16 @@ export default defineComponent({
   props: ["lane"],
   setup(props) {
     const store = useStore();
+    const onDragOver = (e: any) => {
+      e.preventDefault();
+      console.log(
+        `PairingLane taskSourceDragArea: ${e.dataTransfer.getData("task")}`
+      );
+    };
     const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
+        console.log(`PairingLane taskAsJSON: ${JSON.stringify(taskAsJson)}`);
         const droppedTask = JSON.parse(taskAsJson);
         droppedTask.laneId = props.lane.id;
         store.dispatch("addTaskToLane", droppedTask);
@@ -48,6 +60,7 @@ export default defineComponent({
     return {
       tasks: computed(() => store.getters.tasksForLaneId(props.lane.id)),
       users: computed(() => store.getters.usersForLaneId(props.lane.id)),
+      onDragOver,
       onDrop,
     };
   },
