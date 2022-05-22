@@ -123,6 +123,9 @@ export const options: StoreOptions<State> = {
     },
   },
   getters: {
+    taskById: (state) => (taskId: string) => {
+      return state.tasks.find((task) => task.id === taskId);
+    },
     openTasks(state) {
       return state.tasks.filter((task) => !task.laneId);
     },

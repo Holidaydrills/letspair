@@ -5,12 +5,8 @@
     @dragover="onDragOver"
     @dragenter.prevent
   >
-    <div class="lane-section">
-      <TransitionGroup name="list">
-        <div v-for="user in users" :user="user" :key="user.id">
-          <pairing-user :user="user" />
-        </div>
-      </TransitionGroup>
+    <div class="lane-section" ref="userList">
+      <pairing-user v-for="user in users" :user="user" :key="user.id" />
     </div>
     <div class="lane-section">
       <pairing-task v-for="task in tasks" :task="task" :key="task.id" />
@@ -20,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
@@ -31,16 +27,41 @@ export default defineComponent({
   props: ["lane"],
   setup(props) {
     const store = useStore();
+    const userList = ref(HTMLDivElement);
+    onMounted(() => {
+      // Logs: `Headline`
+      console.log("MOUNTED");
+      console.log(userList.value);
+      if (userList.value) {
+        //userList.value.appendChild("TEST");
+      }
+    });
     const onDragOver = (e: any) => {
       e.preventDefault();
-      console.log(
-        `PairingLane taskSourceDragArea: ${e.view.document
-          .querySelector(".dragged-item")
-          .parentNode.getAttribute("data-source-drag-area")} & taskId: ${
-          e.view.document.querySelector(".dragged-item").parentNode.id
-        }`
-      );
+      const draggedDOMElement = e.view.document.querySelector(".dragged-item");
+      const div = document.createElement("div");
+      div.appendChild(draggedDOMElement);
+      if (userList.value) {
+        userList.value.appendChild(div);
+      }
+
+      // const sourceDragArea = draggedDOMElement.getAttribute(
+      //   "data-source-drag-area"
+      // );
+      // const draggedTaskId = draggedDOMElement.getAttribute("data-task-id");
+      // console.log(
+      //   `PairingLane \nsourceDragArea:${sourceDragArea}\ndraggedTaskId=${draggedTaskId}`
+      // );
+      // const draggedTask = store.getters.taskById(draggedTaskId);
+
+      // console.log(`PairingLane taskAsJSON: ${JSON.stringify(draggedTask)}`);
+      // draggedTask.laneId = props.lane.id;
+      // store.dispatch("addTaskToLane", draggedTask);
+      // console.log(
+      //   `Dropped task ${JSON.stringify(draggedTask)} to lane ${props.lane.id}`
+      // );
     };
+
     const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
@@ -66,6 +87,7 @@ export default defineComponent({
       users: computed(() => store.getters.usersForLaneId(props.lane.id)),
       onDragOver,
       onDrop,
+      userList,
     };
   },
   emits: ["removeLane"],

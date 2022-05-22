@@ -11,10 +11,9 @@
       <pairing-task
         v-for="task in tasks"
         :task="task"
-        data-source-drag-area="sideBar"
-        :id="task.id"
         :key="task.id"
         @startDragTask="onStartDragTask"
+        sourceDragArea="sideBar"
       />
     </div>
   </div>
