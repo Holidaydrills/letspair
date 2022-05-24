@@ -74,6 +74,11 @@ $margin-medium: 10px;
   opacity: 0.5;
 }
 
+.hide {
+  transition: 0.01s;
+  transform: translateX(-9999px);
+}
+
 //List transitions
 /* 1. declare transition */
 .list-move,

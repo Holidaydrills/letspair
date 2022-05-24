@@ -2,6 +2,7 @@
   <div>
     Tasks
     <div
+      ref="taskList"
       id="taskArea"
       class="person-area"
       @drop="onDrop"
@@ -32,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-core";
+import { defineComponent, ref } from "@vue/runtime-core";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
 import { useStore } from "@/store";
@@ -42,6 +43,7 @@ import { Task } from "@/models/Task";
 export default defineComponent({
   components: { PairingTask, PairingUser },
   setup() {
+    const taskList = ref<HTMLElement>();
     const store = useStore();
     const onDragOverPersonArea = (e: any) => {
       preventDefault(e);
@@ -52,6 +54,12 @@ export default defineComponent({
     };
     const onDragOverTaskArea = (e: any) => {
       preventDefault(e);
+      const draggedDOMElement = e.view.document.querySelector(".dragged-item");
+      const div = document.createElement("div");
+      div.appendChild(draggedDOMElement);
+      if (taskList.value) {
+        taskList.value.appendChild(div);
+      }
     };
     const onDragEnterTaskArea = (e: any) => {
       preventDefault(e);
@@ -100,6 +108,7 @@ export default defineComponent({
       onDragEnterTaskArea,
       onDrop,
       onStartDragTask,
+      taskList,
     };
   },
 });

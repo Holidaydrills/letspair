@@ -5,10 +5,10 @@
     @dragover="onDragOver"
     @dragenter.prevent
   >
-    <div class="lane-section" ref="userList">
+    <div class="lane-section">
       <pairing-user v-for="user in users" :user="user" :key="user.id" />
     </div>
-    <div class="lane-section">
+    <div class="lane-section" ref="taskList">
       <pairing-task v-for="task in tasks" :task="task" :key="task.id" />
     </div>
   </div>
@@ -27,12 +27,12 @@ export default defineComponent({
   props: ["lane"],
   setup(props) {
     const store = useStore();
-    const userList = ref(HTMLDivElement);
+    const taskList = ref<HTMLElement>();
     onMounted(() => {
       // Logs: `Headline`
       console.log("MOUNTED");
-      console.log(userList.value);
-      if (userList.value) {
+      console.log(taskList.value);
+      if (taskList.value) {
         //userList.value.appendChild("TEST");
       }
     });
@@ -41,9 +41,10 @@ export default defineComponent({
       const draggedDOMElement = e.view.document.querySelector(".dragged-item");
       const div = document.createElement("div");
       div.appendChild(draggedDOMElement);
-      if (userList.value) {
-        userList.value.appendChild(div);
+      if (taskList.value) {
+        taskList.value.appendChild(div);
       }
+      //this.$el.parentNode.appendChild(draggedDOMElement);
 
       // const sourceDragArea = draggedDOMElement.getAttribute(
       //   "data-source-drag-area"
@@ -87,7 +88,7 @@ export default defineComponent({
       users: computed(() => store.getters.usersForLaneId(props.lane.id)),
       onDragOver,
       onDrop,
-      userList,
+      taskList,
     };
   },
   emits: ["removeLane"],
