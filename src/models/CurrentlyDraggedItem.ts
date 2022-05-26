@@ -1,10 +1,14 @@
 export class CurrentlyDraggedItem {
-  public elementType: string;
+  public elementType: DraggableElementType;
   public elementId: string;
-  public sourceArea: string;
-  constructor(elementType: string, elementId: string, sourceArea: string) {
+  public from: DropArea;
+  constructor(
+    elementType: DraggableElementType,
+    elementId: string,
+    from: DropArea
+  ) {
     this.elementType = elementType;
     this.elementId = elementId;
-    this.sourceArea = sourceArea;
+    this.from = from;
   }
 }

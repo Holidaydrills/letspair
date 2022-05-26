@@ -1,0 +1,4 @@
+enum DraggableElementType {
+  Task,
+  User,
+}

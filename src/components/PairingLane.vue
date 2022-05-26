@@ -65,6 +65,8 @@ export default defineComponent({
 
     const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
+      const draggedDOMElement = e.view.document.querySelector(".dragged-item");
+      draggedDOMElement.remove();
       if (taskAsJson) {
         console.log(`PairingLane taskAsJSON: ${JSON.stringify(taskAsJson)}`);
         const droppedTask = JSON.parse(taskAsJson);

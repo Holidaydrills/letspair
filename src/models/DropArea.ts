@@ -1,0 +1,4 @@
+enum DropArea {
+  Sidebar,
+  Lane,
+}

@@ -83,6 +83,8 @@ export default defineComponent({
       }
     };
     const onDrop = (e: any) => {
+      const draggedDOMElement = e.view.document.querySelector(".dragged-item");
+      draggedDOMElement.remove();
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
         const droppedTask = JSON.parse(taskAsJson);
