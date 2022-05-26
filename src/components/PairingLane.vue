@@ -9,7 +9,12 @@
       <pairing-user v-for="user in users" :user="user" :key="user.id" />
     </div>
     <div class="lane-section" ref="taskList">
-      <pairing-task v-for="task in tasks" :task="task" :key="task.id" />
+      <pairing-task
+        v-for="task in tasks"
+        :task="task"
+        :key="task.id"
+        :source-drag-area="lane.id"
+      />
     </div>
   </div>
   <button @click="$emit('removeLane', laneId)">Remove lane</button>
@@ -42,7 +47,7 @@ export default defineComponent({
       const div = document.createElement("div");
       div.appendChild(draggedDOMElement);
       if (taskList.value) {
-        taskList.value.appendChild(div);
+        taskList.value.appendChild(draggedDOMElement);
       }
       //this.$el.parentNode.appendChild(draggedDOMElement);
 
@@ -66,7 +71,10 @@ export default defineComponent({
     const onDrop = (e: any) => {
       const taskAsJson = e.dataTransfer.getData("task");
       const draggedDOMElement = e.view.document.querySelector(".dragged-item");
-      draggedDOMElement.remove();
+      if (draggedDOMElement.dataset.sourceDragArea !== props.lane.id) {
+        draggedDOMElement.remove();
+      }
+
       if (taskAsJson) {
         console.log(`PairingLane taskAsJSON: ${JSON.stringify(taskAsJson)}`);
         const droppedTask = JSON.parse(taskAsJson);

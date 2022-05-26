@@ -14,7 +14,7 @@
         :task="task"
         :key="task.id"
         @startDragTask="onStartDragTask"
-        sourceDragArea="sideBar"
+        source-drag-area="sidebar"
       />
     </div>
   </div>
@@ -58,7 +58,7 @@ export default defineComponent({
       const div = document.createElement("div");
       div.appendChild(draggedDOMElement);
       if (taskList.value) {
-        taskList.value.appendChild(div);
+        taskList.value.appendChild(draggedDOMElement);
       }
     };
     const onDragEnterTaskArea = (e: any) => {
@@ -84,7 +84,12 @@ export default defineComponent({
     };
     const onDrop = (e: any) => {
       const draggedDOMElement = e.view.document.querySelector(".dragged-item");
-      draggedDOMElement.remove();
+      console.log(
+        `SIDEBAR: Source drag area ${draggedDOMElement.dataset.sourceDragArea}`
+      );
+      if (draggedDOMElement.dataset.sourceDragArea !== "sidebar") {
+        draggedDOMElement.remove();
+      }
       const taskAsJson = e.dataTransfer.getData("task");
       if (taskAsJson) {
         const droppedTask = JSON.parse(taskAsJson);
