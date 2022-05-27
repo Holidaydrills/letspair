@@ -6,7 +6,12 @@
     @dragenter.prevent
   >
     <div class="lane-section">
-      <pairing-user v-for="user in users" :user="user" :key="user.id" />
+      <pairing-user
+        v-for="user in users"
+        :user="user"
+        :key="user.id"
+        ref="itemRefs"
+      />
     </div>
     <div class="lane-section" ref="taskList">
       <pairing-task

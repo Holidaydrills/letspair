@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { Task } from "@/models/Task";
-import { ref, defineProps, defineEmits } from "vue";
+import { ref, defineProps, defineEmits, defineExpose } from "vue";
 
 const emit = defineEmits(["removeLane", "startDragTask"]);
 const props = defineProps(["task", "sourceDragArea"]);
@@ -39,4 +39,7 @@ function addSourceDragAreaField(taskAsJson: string) {
 function dragEnd() {
   isDragged.value = false;
 }
+defineExpose({
+  isDragged,
+});
 </script>

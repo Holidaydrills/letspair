@@ -9,12 +9,13 @@
       @dragover="onDragOverTaskArea"
       @dragenter.prevent
     >
-      <pairing-task
+      <PairingTask
         v-for="task in tasks"
         :task="task"
         :key="task.id"
         @startDragTask="onStartDragTask"
         source-drag-area="sidebar"
+        ref="taskListItems"
       />
     </div>
   </div>
@@ -27,15 +28,16 @@
       @dragover="onDragOverPersonArea"
       @dragenter.prevent
     >
-      <pairing-user v-for="user in users" v-bind:user="user" :key="user.id" />
+      <PairingUser v-for="user in users" v-bind:user="user" :key="user.id" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "@vue/runtime-core";
+import { defineComponent, ref, onMounted } from "@vue/runtime-core";
 import PairingUser from "./PairingUser.vue";
 import PairingTask from "./PairingTask.vue";
+import Test from "./Test.vue";
 import { useStore } from "@/store";
 import { computed } from "vue";
 import { Task } from "@/models/Task";
@@ -44,7 +46,11 @@ export default defineComponent({
   components: { PairingTask, PairingUser },
   setup() {
     const taskList = ref<HTMLElement>();
+    //https://github.com/vuejs/core/issues/5447
+    const taskListItems = ref([]);
+
     const store = useStore();
+
     const onDragOverPersonArea = (e: any) => {
       preventDefault(e);
     };
@@ -57,8 +63,9 @@ export default defineComponent({
       const draggedDOMElement = e.view.document.querySelector(".dragged-item");
       const div = document.createElement("div");
       div.appendChild(draggedDOMElement);
-      if (taskList.value) {
-        taskList.value.appendChild(draggedDOMElement);
+      if (taskList.value && taskListItems.value) {
+        // taskList.value.appendChild(draggedDOMElement);
+        taskList.value.insertBefore(draggedDOMElement, taskListItems.value[2]);
       }
     };
     const onDragEnterTaskArea = (e: any) => {
@@ -116,6 +123,7 @@ export default defineComponent({
       onDrop,
       onStartDragTask,
       taskList,
+      taskListItems,
     };
   },
 });
