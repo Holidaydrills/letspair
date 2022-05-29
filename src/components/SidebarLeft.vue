@@ -28,7 +28,12 @@
       @dragover="onDragOverPersonArea"
       @dragenter.prevent
     >
-      <PairingUser v-for="user in users" v-bind:user="user" :key="user.id" />
+      <PairingUser
+        v-for="user in users"
+        v-bind:user="user"
+        :key="user.id"
+        ref="userListItems"
+      />
     </div>
   </div>
 </template>
@@ -48,8 +53,13 @@ export default defineComponent({
     const taskList = ref<HTMLElement>();
     //https://github.com/vuejs/core/issues/5447
     const taskListItems = ref([]);
-
+    const userListItems = ref([]);
     const store = useStore();
+
+    onMounted(() => {
+      console.log(taskListItems.value);
+      console.log(userListItems.value);
+    });
 
     const onDragOverPersonArea = (e: any) => {
       preventDefault(e);
@@ -124,6 +134,7 @@ export default defineComponent({
       onStartDragTask,
       taskList,
       taskListItems,
+      userListItems,
     };
   },
 });
